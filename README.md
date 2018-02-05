@@ -1,5 +1,5 @@
 ---
-revision    : Mon Feb 05, 2018 19:43:21
+revision    : Mon Feb 05, 2018 19:47:54
 author      : Jean-Michel Marcastel
 title       : KAML ain't markup language
 ---
@@ -202,10 +202,13 @@ Sections
     [Scalars](#scalars) |
     [Indexed arrays](#indexed-arrays) |
     [Associative arrays](#associative-arrays) |
-    [Compound variables](#compound-variables) |
+    [Compound variables](#compound-variables)
 
 Previous
 :   [Top](#top)
+
+Next
+:   [About](#about)
 
 <!-- @} -->
 <!-- @{ h3: general considerations -->
@@ -865,8 +868,19 @@ points = ( ( x=1 y=2 z=3 )
 ```
 
 <!-- @} -->
+## About
+<!-- @{ toc -->
+
+Sections
+:   [General considerations](#general-considerations) |
+    [Get involved](#get-involved)
+
+Previous
+:   [Specifications](#specifications)
+
+<!-- @} -->
 <!-- @{ comparison with other formats -->
-#### [Comparison with other formats](#specifications)
+#### [Comparison with other formats](#about)
 
 Why yet another configuration exchange markup language? We already have [ASN-1], [JSON], [TOML], [YAML], [XML], and countless
 others! The original motivation was to have a simple to read, simple to parse, and simple to implement configuration file format
@@ -900,7 +914,7 @@ http://www.yaml.org/spec/1.2/spec.html
 
 <!-- @} -->
 <!-- @{ get involved -->
-#### [Get Involved](#specifications)
+#### [Get Involved](#about)
 
 Documentation, bug reports, pull requests, and all other contributions are welcome!
 
