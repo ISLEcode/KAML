@@ -1,5 +1,5 @@
 ---
-revision    : Mon Feb 05, 2018 17:58:16
+revision    : Mon Feb 05, 2018 19:37:49
 author      : Jean-Michel Marcastel
 title       : KAML ain't markup language
 ---
@@ -7,9 +7,13 @@ title       : KAML ain't markup language
 ## KAML ain't markup language
 <!-- @{ toc -->
 
--   [Overview](#overview)
--   [Examples](#examples)
--   [Version](#version)
+Sections
+:   [Overview](#overview) |
+    [Examples](#examples) |
+    [Version](#version)
+
+Next
+:   [Specifications](#specifications)
 
 <!-- @} -->
 <!-- @{ h3: overview -->
@@ -29,16 +33,17 @@ which is a de facto standard for mobile apps, REST interfaces, and the like.
 <!-- @{ h3: examples -->
 ### Examples
 
--   [Plain scalars](#plain-scalars)
--   [Scalars with type attributes](#scalars-with-type-attribute)
--   [Indexed and associative arrays, compound variables](#indexed-and-associative-arrays-compound-variables)
--   [Custom types and classes](#custom-types-and-classes)
--   [POSIX shell features](#posix-shell-features)
--   [Korn shell extensions](#korn-shell-extensions)
--   [Custom type definitions ](#custom-type-definitions)
+Topics
+:   [Plain scalars](#plain-scalars) |
+    [Scalars with type attributes](#scalars-with-type-attributes) |
+    [Indexed and associative arrays, compound variables](#indexed-and-associative-arrays-compound-variables) |
+    [Custom types and classes](#custom-types-and-classes) |
+    [POSIX shell features](#posix-shell-features) |
+    [Korn shell extensions](#korn-shell-extensions) |
+    [Custom type definitions ](#custom-type-definitions)
 
 <!-- @{ plain scalars -->
-#### Plain scalars
+#### [Plain scalars](#examples)
 ```
 title="KAML Example"                    # A simple string
 author=Jean-Michel\ Marcastel           # Alternate string representation with escaped whitespaces
@@ -47,7 +52,7 @@ number=1234                             # Numeric value handled as a string
 
 <!-- @} -->
 <!-- @{ scalars with type attributes -->
-#### Scalars with type attributes
+#### [Scalars with type attributes](#examples)
 ```
 bool_e      flag=true                   # Enumeration type `bool_e` (true, false)
 
@@ -70,7 +75,7 @@ hexfloat    rate=0.1234567              # Float represented in hexadecimal notat
 
 <!-- @} -->
 <!-- @{ indexed and associative arrays, compound variables-->
-#### Indexed and associative arrays, compound variables
+#### [Indexed and associative arrays, compound variables](#examples)
 ```
 upper       see_also=(                  # Indexed array with uppercased items
     asn-1 ini json kaml sgml yaml xml
@@ -102,7 +107,7 @@ compound record=(                       # Compound variable
 
 <!-- @} -->
 <!-- @{ custom types and classes -->
-#### Custom types and classes
+#### [Custom types and classes](#examples)
 ```
 BookmarkItem website=(                  # Custom class `BookmarkItem`
     url=https://github.com/ISLEcode/KAML
@@ -114,7 +119,7 @@ website.label+=" (github)"              # Appending to a previous declared prope
 
 <!-- @} -->
 <!-- @{ posix shell features -->
-#### POSIX shell features
+#### [POSIX shell features](#examples)
 ```
 files=*                                 # Generate filenames matching a pattern
 files=**                                # Alternate syntax for recursive descent
@@ -124,7 +129,7 @@ system=$(uname -s)                      # Embed output of exec(3)
 
 <!-- @} -->
 <!-- @{ korn shell extensions -->
-#### Korn shell extensions
+#### [Korn shell extensions](#examples)
 ```
 top_bin=${PATH%%:*}                     # Variable manipulation and conversions
 content=$(< /etc/passwd )               # Slurp in files
@@ -132,7 +137,7 @@ content=$(< /etc/passwd )               # Slurp in files
 
 <!-- @} -->
 <!-- @{ custom type definitions -->
-#### Custom type definitions
+#### [Custom type definitions](#examples)
 ```
 typeset -u tag=kaml                     # String converted automatically to uppercase
 typeset -l extension=.xml               # String converted automatically to lowercase
@@ -187,156 +192,102 @@ Guidelines:
 
 
 <!-- @} -->
+## Specifications
+<!-- @{ toc -->
 
-Latest tagged version:
-[v0.4.0](https://github.com/mojombo/toml/blob/master/versions/en/toml-v0.4.0.md).
+Sections
+:   [General considerations](#general-considerations) |
+    [Comments](#comments) |
+    [Name/value pairs](#name-value-pairs) |
+    [String](#user-content-string) |
+    [Integer](#user-content-integer) |
+    [Float](#user-content-float) |
+    [Boolean](#user-content-boolean) |
+    [Offset Date-Time](#user-content-offset-date-time) |
+    [Local Date-Time](#user-content-local-date-time) |
+    [Local Date](#user-content-local-date) |
+    [Local Time](#user-content-local-time) |
+    [Array](#user-content-array) |
+    [Table](#user-content-table) |
+    [Inline Table](#user-content-inline-table) |
+    [Array of Tables](#user-content-array-of-tables) |
+    [Filename Extension](#user-content-filename-extension) |
+    [Comparison with Other Formats](#user-content-comparison-with-other-formats) |
+    [Get Involved](#user-content-get-involved) |
+    [Wiki](#user-content-wiki)
 
-NOTE: The `master` branch of this repository
+Previous
+:   [Top](#top)
 
-The next planned release is v1.0.0. The intention is for this release to be
-fully backwards compatible with v0.4.0.
+<!-- @} -->
+<!-- @{ h3: general considerations -->
+### [General considerations](#specifications)
 
-Objectives
-----------
+-   KAML is Korn shell syntax
+    -   it is case sensitive
+    -   character encoding is either ANSI ASCII or UTF-8
+    -   whitespace matches POSIX regexp class `[[:space:]]`
+    -   `ksh -n` is the KAML linter
+-   KAML files should use the extension `.kml`.
+-   KAML files should follow UNIX conventions for newlines
 
-[KAML] aims to be a minimal configuration file format that's easy to read due to
-obvious semantics. [KAML] is designed to map unambiguously to a hash table. [KAML]
-should be easy to parse into data structures in a wide variety of languages.
-
-Table of contents
--------
-
-- [Example](#user-content-example)
-- [Spec](#user-content-spec)
-- [Comment](#user-content-comment)
-- [Key/Value Pair](#user-content-keyvalue-pair)
-- [Keys](#user-content-keys)
-- [String](#user-content-string)
-- [Integer](#user-content-integer)
-- [Float](#user-content-float)
-- [Boolean](#user-content-boolean)
-- [Offset Date-Time](#user-content-offset-date-time)
-- [Local Date-Time](#user-content-local-date-time)
-- [Local Date](#user-content-local-date)
-- [Local Time](#user-content-local-time)
-- [Array](#user-content-array)
-- [Table](#user-content-table)
-- [Inline Table](#user-content-inline-table)
-- [Array of Tables](#user-content-array-of-tables)
-- [Filename Extension](#user-content-filename-extension)
-- [Comparison with Other Formats](#user-content-comparison-with-other-formats)
-- [Get Involved](#user-content-get-involved)
-- [Wiki](#user-content-wiki)
-
-Spec
-----
-
--   [KAML] is Korn shell (use `ksh -n` to lint your configuration file)
--   [KAML] is case sensitive.
-* A [KAML] file must be a valid UTF-8 encoded Unicode document.
-* Whitespace means tab (0x09) or space (0x20).
-* Newline means LF (0x0A) or CRLF (0x0D0A).
-
-### Comments 
+<!-- @} -->
+<!-- @{ h3: comments ->
+### [Comments](#specifications)
 
 A hash symbol marks the rest of the line as a comment.
 
 ```{.sh}
 # This is a full-line comment
-key = "value" # This is a comment at the end of a line
+name="value" # This is a comment at the end of a line
 ```
 
-Key/Value Pair
---------------
+<!-- @} -->
+<!-- @{ h3: name/value pairs -->
+### [Name/value pairs](#specifications)
 
-The primary building block of a [KAML] document is the key/value pair.
-
-Keys are on the left of the equals sign and values are on the right. Whitespace
-is ignored around key names and values. The key, equals sign, and value must be
-on the same line (though some values can be broken over multiple lines).
+The primary building block of a KAML document is the name/value pair.
 
 ```{.sh}
-key=value
+name=value
 ```
 
-hash
-array
-integer
+1.  Names are on the left of the equals sign and values are on the right.
 
-Values must be of the following types: String, Integer, Float, Boolean,
-Datetime, Array, or Inline Table. Unspecified values are invalid.
+1.  A name cannot be an empty string.
 
-```{.sh}
-key = # INVALID
-```
+1.  The equal sign must not be preceded or followed by white space.
 
-Keys
-----
+1.  The name must be a valid shell identifier (i.e. start with an underscore or an alphabetic character, and be composed of
+    zero or more alphanumeric characters or the underscore).
 
-A key may be either bare, quoted or dotted.
+    <!-- TODO: myKeyName, my-key-name should be standardised to my_key_name -->
 
-**Bare keys** may only contain ASCII letters, ASCII digits, underscores, and
-dashes (`A-Za-z0-9_-`). Note that bare keys are allowed to be composed of only
-ASCII digits, e.g. `1234`, but are always interpreted as strings.
+1.  The dot in names is used to define the path of the property in the compound variable.
 
-```{.sh}
-key = "value"
-bare_key = "value"
-bare-key = "value"
-1234 = "value"
-```
+    For instance:
+    ```
+    my.address.zicode=1201
+    ```
+    would be represented in JSON as:
+    ```{.json}
+    {
+        "my": {
+            "address": {
+                "zipcode": "1201"
+            }
+        }
+    }
+    ```
 
-**Quoted keys** follow the exact same rules as either basic strings or literal
-strings and allow you to use a much broader set of key names. Best practice is
-to use bare keys except when absolutely necessary.
+1.  The name can be preceded by a type specification (see [type specifications](#type-spectifications) below.
 
-```{.sh}
-"127.0.0.1" = "value"
-"character encoding" = "value"
-"ʎǝʞ" = "value"
-'key2' = "value"
-'quoted "value"' = "value"
-```
+1.  The right hand side value can be either a [scalar](#scalars), an [indexed array](#indexed-arrays), an [associative
+    array](#associative-array), a [compound variable](#compound-variables), or [custom types](#custom-types).
 
-A bare key must be non-empty, but an empty quoted key is allowed (though
-discouraged).
-
-```{.sh}
-= "no key name"  # INVALID
-"" = "blank"     # VALID but discouraged
-'' = 'blank'     # VALID but discouraged
-```
-
-**Dotted keys** are a sequence of bare or quoted keys joined with a dot. This
-allows for grouping similar properties together:
-
-```{.sh}
-name = "Orange"
-physical.color = "orange"
-physical.shape = "round"
-site."google.com" = true
-```
-
-In JSON land, that would give you the following structure:
-
-```json
-{
-  "name": "Orange",
-  "physical": {
-    "color": "orange",
-    "shape": "round"
-  },
-  "site": {
-    "google.com": true
-  }
-}
-```
-
-Whitespace around dot-separated parts is ignored, however, best practice is to
-not use any extraneous whitespace.
-
-String
-------
+<!-- @} -->
+<!-- @{ h3: scalars -->
+### [Scalars](#specifications)
 
 There are four ways to express strings: basic, multi-line basic, literal, and
 multi-line literal. All strings must contain only valid UTF-8 characters.
@@ -459,8 +410,7 @@ Control characters other than tab are not permitted in a literal string. Thus,
 for binary data it is recommended that you use Base64 or another suitable ASCII
 or UTF-8 encoding. The handling of that encoding will be application specific.
 
-Integer
--------
+#### Integer
 
 Integers are whole numbers. Positive numbers may be prefixed with a plus sign.
 Negative numbers are prefixed with a minus sign.
@@ -507,8 +457,7 @@ bin1 = 0b11010110
 64 bit (signed long) range expected (−9,223,372,036,854,775,808 to
 9,223,372,036,854,775,807).
 
-Float
------
+#### Float
 
 Floats should be implemented as IEEE 754 binary64 values.
 
@@ -560,8 +509,7 @@ sf5 = +nan # same as `nan`
 sf6 = -nan # valid, actual encoding is implementation specific
 ```
 
-Boolean
--------
+#### Boolean
 
 Booleans are just the tokens you're used to. Always lowercase.
 
@@ -570,8 +518,7 @@ bool1 = true
 bool2 = false
 ```
 
-Offset Date-Time
----------------
+#### Offset Date-Time
 
 To unambiguously represent a specific instant in time, you may use an
 [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time with offset.
@@ -594,8 +541,7 @@ millisecond precision is expected. If the value contains greater precision than
 the implementation can support, the additional precision must be truncated, not
 rounded.
 
-Local Date-Time
---------------
+#### Local Date-Time
 
 If you omit the offset from an [RFC 3339](http://tools.ietf.org/html/rfc3339)
 formatted date-time, it will represent the given date-time without any relation
@@ -613,8 +559,7 @@ millisecond precision is expected. If the value contains greater precision than
 the implementation can support, the additional precision must be truncated, not
 rounded.
 
-Local Date
-----------
+#### Local Date
 
 If you include only the date portion of an
 [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time, it will
@@ -624,8 +569,7 @@ represent that entire day without any relation to an offset or timezone.
 ld1 = 1979-05-27
 ```
 
-Local Time
-----------
+##### Local Time
 
 If you include only the time portion of an [RFC
 3339](http://tools.ietf.org/html/rfc3339) formatted date-time, it will represent
@@ -642,8 +586,9 @@ millisecond precision is expected. If the value contains greater precision than
 the implementation can support, the additional precision must be truncated, not
 rounded.
 
-Array
------
+<!-- @} -->
+<!-- @{ h3: indexed arrays --->
+### [Indexed arrays](#specifications)
 
 Arrays are square brackets with values inside. Whitespace is ignored. Elements
 are separated by commas. Data types may not be mixed (different ways to define
@@ -675,8 +620,9 @@ arr8 = [
 ]
 ```
 
-Table
------
+<!-- @} -->
+<!-- @{ h3: associative arrays -->
+### [Associative arrays](#specifications)
 
 Tables (also known as hash tables or dictionaries) are collections of key/value
 pairs. They appear in square brackets on a line by themselves. You can tell them
@@ -778,8 +724,7 @@ All table names must be non-empty.
 [.]    # INVALID
 ```
 
-Inline Table
-------------
+#### Inline Table
 
 Inline tables provide a more compact syntax for expressing tables. They are
 especially useful for grouped data that can otherwise quickly become verbose.
@@ -811,8 +756,9 @@ x = 1
 y = 2
 ```
 
-Array of Tables
----------------
+<!-- @} -->
+<!-- @{ h3: compound variables -->
+### [Compound variables](#specifications)
 
 The last type that has not yet been expressed is an array of tables. These can
 be expressed by using a table name in double brackets. Each table with the same
@@ -930,13 +876,9 @@ points = ( ( x=1 y=2 z=3 )
            ( x=2 y=4 z=8 ) )
 ```
 
-Filename Extension
-------------------
-
-[KAML] files should use the extension `.kml`.
-
-Comparison with Other Formats
------------------------------
+<!-- @} -->
+<!-- @{ comparison with other formats -->
+#### [Comparison with other formats](#specifications)
 
 Why yet another configuration exchange markup language? We already have [ASN-1], [JSON], [TOML], [YAML], [XML], and countless
 others! The original motivation was to have a simple to read, simple to parse, and simple to implement configuration file format
@@ -965,31 +907,17 @@ helpful in a configuration file that may be edited by hand.
 The YAML format is oriented towards configuration files just like
 [KAML]. For many purposes, however, YAML is an overly complex
 solution. [KAML] aims for simplicity, a goal which is not apparent in
-the YAML specification: 
+the YAML specification:
 http://www.yaml.org/spec/1.2/spec.html
 
-Get Involved
-------------
+<!-- @} -->
+<!-- @{ get involved -->
+#### [Get Involved](#specifications)
 
-Documentation, bug reports, pull requests, and all other contributions
-are welcome!
+Documentation, bug reports, pull requests, and all other contributions are welcome!
 
-Wiki
-----------------------------------------------------------------------
-
-We have an [Official [KAML] Wiki](https://github.com/toml-lang/toml/wiki) that
-catalogs the following:
-
-* Projects using [KAML]
-* Implementations
-* Validators
-* Language agnostic test suite for [KAML] decoders and encoders
-* Editor support
-* Encoders
-* Converters
-
-Please take a look if you'd like to view or add to that list. Thanks for being
-a part of the [KAML] community!
+<!-- @} -->
+<!-- @{ bookmarks -->
 
 [ASN-1]:    https://en.wikipedia.org/wiki/Abstract_Syntax_Notation_One
 [INI]:      https://en.wikipedia.org/wiki/INI_file
