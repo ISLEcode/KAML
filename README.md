@@ -1,11 +1,12 @@
 ---
-revision    : Mon Feb 05, 2018 17:48:37
+revision    : Mon Feb 05, 2018 17:56:04
 author      : Jean-Michel Marcastel
 title       : KAML ain't markup language
 ---
 
 ## KAML ain't markup language
 
+<!-- @{ h3: overview -->
 ### Overview
 
 [KAML] aims to be a minimal configuration file format that is easy to read by programs and humans alike. [KAML] is the formal
@@ -18,15 +19,17 @@ compliant_ -- though obviously this is an Open Group prerogative.
 alternative. Like [YAML], [KAML] is a superset of [JSON]; [KAML] is a superset of [YAML] too! [KAML] aims to play well with [JSON]
 which is a de facto standard for mobile apps, REST interfaces, and the like.
 
+<!-- @} -->
+<!-- @{ h3: Examples -->
 ### Examples
 
--   [Plain scalars]
--   [Scalars with type attributes]
--   [Indexed arrays, associative arrays, and compound variables]
--   [Custom types and classes]
--   [POSIX shell features]
--   [Korn shell extensions]
--   [Custom definitions using the `typeset` command]
+-   [Plain scalars](#plain-scalars)
+-   [Scalars with type attributes](#scalars-with-type-attribute)
+-   [Indexed and associative arrays, compound variables](#indexed-and-associative-arrays-compound-variables)
+-   [Custom types and classes](#custom-types-and-classes)
+-   [POSIX shell features](#posix-shell-features)
+-   [Korn shell extensions](#korn-shell-extensions)
+-   [Custom type definitions ]#(custom-type-definitions)
 
 <!-- @{ plain scalars -->
 #### Plain scalars
@@ -37,7 +40,8 @@ number=1234                             # Numeric value handled as a string
 ```
 
 <!-- @} -->
-#### Scalars with type attributes <!-- @{ -->
+<!-- @{ scalars with type attributes -->
+#### Scalars with type attributes
 ```
 bool_e      flag=true                   # Enumeration type `bool_e` (true, false)
 
@@ -59,7 +63,8 @@ hexfloat    rate=0.1234567              # Float represented in hexadecimal notat
 ```
 
 <!-- @} -->
-#### Indexed arrays, associative arrays, and compound variables <!-- @{ -->
+<!-- @{ indexed and associative arrays, compound variables-->
+#### Indexed and associative arrays, compound variables
 ```
 upper       see_also=(                  # Indexed array with uppercased items
     asn-1 ini json kaml sgml yaml xml
@@ -90,7 +95,8 @@ compound record=(                       # Compound variable
 ```
 
 <!-- @} -->
-#### Custom types and classes <!-- @{ -->
+<!-- @{ custom types and classes -->
+#### Custom types and classes
 ```
 BookmarkItem website=(                  # Custom class `BookmarkItem`
     url=https://github.com/ISLEcode/KAML
@@ -101,7 +107,8 @@ website.label+=" (github)"              # Appending to a previous declared prope
 ```
 
 <!-- @} -->
-#### POSIX shell features <!-- @{ -->
+<!-- @{ posix shell features -->
+#### POSIX shell features
 ```
 files=*                                 # Generate filenames matching a pattern
 files=**                                # Alternate syntax for recursive descent
@@ -110,14 +117,16 @@ system=$(uname -s)                      # Embed output of exec(3)
 ```
 
 <!-- @} -->
-#### Korn shell extensions <!-- @{ -->
+<!-- @{ korn shell extensions -->
+#### Korn shell extensions
 ```
 top_bin=${PATH%%:*}                     # Variable manipulation and conversions
 content=$(< /etc/passwd )               # Slurp in files
 ```
 
 <!-- @} -->
-#### Custom definitions using the `typeset` command <!-- @{ -->
+<!-- @{ custom type definitions -->
+#### Custom type definitions
 ```
 typeset -u tag=kaml                     # String converted automatically to uppercase
 typeset -l extension=.xml               # String converted automatically to lowercase
@@ -148,6 +157,7 @@ typeset -b image=...                    # Binary data encoded as Base64
 <!-- @} -->
 
 <!-- @} -->
+<!-- @{ h3: version -->
 ### Version
 
 The [KAML] implementation has been stable over three decades. The [KAML] specification is still work-in-progress as many of the more
@@ -169,6 +179,8 @@ Guidelines:
        repository of this repository tracks the very latest development and may contain
     features and changes that do not exist on any released version.
 
+
+<!-- @} -->
 
 Latest tagged version:
 [v0.4.0](https://github.com/mojombo/toml/blob/master/versions/en/toml-v0.4.0.md).
