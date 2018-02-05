@@ -1,5 +1,5 @@
 ---
-revision    : Mon Feb 05, 2018 19:37:49
+revision    : Mon Feb 05, 2018 19:43:21
 author      : Jean-Michel Marcastel
 title       : KAML ain't markup language
 ---
@@ -198,23 +198,11 @@ Guidelines:
 Sections
 :   [General considerations](#general-considerations) |
     [Comments](#comments) |
-    [Name/value pairs](#name-value-pairs) |
-    [String](#user-content-string) |
-    [Integer](#user-content-integer) |
-    [Float](#user-content-float) |
-    [Boolean](#user-content-boolean) |
-    [Offset Date-Time](#user-content-offset-date-time) |
-    [Local Date-Time](#user-content-local-date-time) |
-    [Local Date](#user-content-local-date) |
-    [Local Time](#user-content-local-time) |
-    [Array](#user-content-array) |
-    [Table](#user-content-table) |
-    [Inline Table](#user-content-inline-table) |
-    [Array of Tables](#user-content-array-of-tables) |
-    [Filename Extension](#user-content-filename-extension) |
-    [Comparison with Other Formats](#user-content-comparison-with-other-formats) |
-    [Get Involved](#user-content-get-involved) |
-    [Wiki](#user-content-wiki)
+    [Name/value pairs](#namevalue-pairs) |
+    [Scalars](#scalars) |
+    [Indexed arrays](#indexed-arrays) |
+    [Associative arrays](#associative-arrays) |
+    [Compound variables](#compound-variables) |
 
 Previous
 :   [Top](#top)
@@ -232,7 +220,7 @@ Previous
 -   KAML files should follow UNIX conventions for newlines
 
 <!-- @} -->
-<!-- @{ h3: comments ->
+<!-- @{ h3: comments -->
 ### [Comments](#specifications)
 
 A hash symbol marks the rest of the line as a comment.
