@@ -1,5 +1,5 @@
 ---
-revision    : Mon Feb 05, 2018 19:47:54
+revision    : Mon Feb 05, 2018 19:49:35
 author      : Jean-Michel Marcastel
 title       : KAML ain't markup language
 ---
@@ -872,7 +872,7 @@ points = ( ( x=1 y=2 z=3 )
 <!-- @{ toc -->
 
 Sections
-:   [General considerations](#general-considerations) |
+:   [Comparison with other formats](#comparison-with-other-formats) |
     [Get involved](#get-involved)
 
 Previous
