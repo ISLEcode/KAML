@@ -1,5 +1,5 @@
 ---
-revision    : Mon Feb 05, 2018 19:50:57
+revision    : Mon Feb 05, 2018 19:53:48
 author      : Jean-Michel Marcastel
 title       : KAML ain't markup language
 ---
@@ -13,7 +13,8 @@ Sections
     [Version](#version)
 
 Next
-:   [Specifications](#specifications)
+:   [Specifications](#specifications) |
+    [About](#about)
 
 <!-- @} -->
 <!-- @{ h3: overview -->
@@ -205,7 +206,7 @@ Sections
     [Compound variables](#compound-variables)
 
 Previous
-:   [Top](#top)
+:   [Top](#kaml-aint-markup-language)
 
 Next
 :   [About](#about)
@@ -876,7 +877,7 @@ Sections
     [Get involved](#get-involved)
 
 Previous
-:   [Specifications](#specifications), [Top](#top)
+:   [Specifications](#specifications), [Top](#kaml-aint-markup-language)
 
 <!-- @} -->
 <!-- @{ comparison with other formats -->
