@@ -1,5 +1,5 @@
 ---
-revision    : Mon Feb 05, 2018 19:49:35
+revision    : Mon Feb 05, 2018 19:50:57
 author      : Jean-Michel Marcastel
 title       : KAML ain't markup language
 ---
@@ -876,7 +876,7 @@ Sections
     [Get involved](#get-involved)
 
 Previous
-:   [Specifications](#specifications)
+:   [Specifications](#specifications), [Top](#top)
 
 <!-- @} -->
 <!-- @{ comparison with other formats -->
