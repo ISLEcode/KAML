@@ -1,5 +1,5 @@
 ---
-revision    : Mon Feb 05, 2018 17:47:33
+revision    : Mon Feb 05, 2018 17:48:37
 author      : Jean-Michel Marcastel
 title       : KAML ain't markup language
 ---
@@ -28,7 +28,8 @@ which is a de facto standard for mobile apps, REST interfaces, and the like.
 -   [Korn shell extensions]
 -   [Custom definitions using the `typeset` command]
 
-#### Plain scalars {#eg-scalars} <!-- @{ -->
+<!-- @{ plain scalars -->
+#### Plain scalars
 ```
 title="KAML Example"                    # A simple string
 author=Jean-Michel\ Marcastel           # Alternate string representation with escaped whitespaces
