@@ -1,5 +1,5 @@
 ---
-revision    : Mon Feb 05, 2018 17:36:29
+revision    : Mon Feb 05, 2018 17:44:15
 author      : Jean-Michel Marcastel
 title       : KAML ain't markup language
 ---
@@ -21,6 +21,7 @@ which is a de facto standard for mobile apps, REST interfaces, and the like.
 ### Examples
 
 -   [Plain scalars]
+https://github.com/ISLEcode/KAML/blob/master/README.md#plain-scalars--
 -   [Scalars with type attributes]
 -   [Indexed arrays, associative arrays, and compound variables]
 -   [Custom types and classes]
@@ -28,7 +29,7 @@ which is a de facto standard for mobile apps, REST interfaces, and the like.
 -   [Korn shell extensions]
 -   [Custom definitions using the `typeset` command]
 
-#### Plain scalars <!-- @{ --> <!-- @{ -->
+#### Plain scalars<|-- @{ -->
 ```
 title="KAML Example"                    # A simple string
 author=Jean-Michel\ Marcastel           # Alternate string representation with escaped whitespaces
@@ -36,7 +37,7 @@ number=1234                             # Numeric value handled as a string
 ```
 
 <!-- @} -->
-#### Scalars with type attributes <!-- @{ -->
+#### Scalars with type attributes<|-- @{ -->
 ```
 bool_e      flag=true                   # Enumeration type `bool_e` (true, false)
 
@@ -58,7 +59,7 @@ hexfloat    rate=0.1234567              # Float represented in hexadecimal notat
 ```
 
 <!-- @} -->
-#### Indexed arrays, associative arrays, and compound variables <!-- @{ -->
+#### Indexed arrays, associative arrays, and compound variables<|-- @{ -->
 ```
 upper       see_also=(                  # Indexed array with uppercased items
     asn-1 ini json kaml sgml yaml xml
@@ -89,7 +90,7 @@ compound record=(                       # Compound variable
 ```
 
 <!-- @} -->
-#### Custom types and classes <!-- @{ -->
+#### Custom types and classes<|-- @{ -->
 ```
 BookmarkItem website=(                  # Custom class `BookmarkItem`
     url=https://github.com/ISLEcode/KAML
@@ -100,7 +101,7 @@ website.label+=" (github)"              # Appending to a previous declared prope
 ```
 
 <!-- @} -->
-#### POSIX shell features <!-- @{ -->
+#### POSIX shell features<|-- @{ -->
 ```
 files=*                                 # Generate filenames matching a pattern
 files=**                                # Alternate syntax for recursive descent
@@ -109,14 +110,14 @@ system=$(uname -s)                      # Embed output of exec(3)
 ```
 
 <!-- @} -->
-#### Korn shell extensions <!-- @{ -->
+#### Korn shell extensions<|-- @{ -->
 ```
 top_bin=${PATH%%:*}                     # Variable manipulation and conversions
 content=$(< /etc/passwd )               # Slurp in files
 ```
 
 <!-- @} -->
-#### Custom definitions using the `typeset` command <!-- @{ -->
+#### Custom definitions using the `typeset` command<|-- @{ -->
 ```
 typeset -u tag=kaml                     # String converted automatically to uppercase
 typeset -l extension=.xml               # String converted automatically to lowercase
