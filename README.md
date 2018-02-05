@@ -1,11 +1,17 @@
 ---
-revision    : Mon Feb 05, 2018 17:56:04
+revision    : Mon Feb 05, 2018 17:58:16
 author      : Jean-Michel Marcastel
 title       : KAML ain't markup language
 ---
 
 ## KAML ain't markup language
+<!-- @{ toc -->
 
+-   [Overview](#overview)
+-   [Examples](#examples)
+-   [Version](#version)
+
+<!-- @} -->
 <!-- @{ h3: overview -->
 ### Overview
 
@@ -20,7 +26,7 @@ alternative. Like [YAML], [KAML] is a superset of [JSON]; [KAML] is a superset o
 which is a de facto standard for mobile apps, REST interfaces, and the like.
 
 <!-- @} -->
-<!-- @{ h3: Examples -->
+<!-- @{ h3: examples -->
 ### Examples
 
 -   [Plain scalars](#plain-scalars)
@@ -29,7 +35,7 @@ which is a de facto standard for mobile apps, REST interfaces, and the like.
 -   [Custom types and classes](#custom-types-and-classes)
 -   [POSIX shell features](#posix-shell-features)
 -   [Korn shell extensions](#korn-shell-extensions)
--   [Custom type definitions ]#(custom-type-definitions)
+-   [Custom type definitions ](#custom-type-definitions)
 
 <!-- @{ plain scalars -->
 #### Plain scalars
