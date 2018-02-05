@@ -1,5 +1,5 @@
 ---
-revision    : Mon Feb 05, 2018 19:53:48
+revision    : Mon Feb 05, 2018 19:55:46
 author      : Jean-Michel Marcastel
 title       : KAML ain't markup language
 ---
@@ -18,7 +18,7 @@ Next
 
 <!-- @} -->
 <!-- @{ h3: overview -->
-### Overview
+### [Overview](#kaml-aint-markup-language)
 
 [KAML] aims to be a minimal configuration file format that is easy to read by programs and humans alike. [KAML] is the formal
 specification of Korn shell _compound variables_ which have been around since the mid 1980s -- we have, with `ksh93`, a reference
@@ -32,7 +32,7 @@ which is a de facto standard for mobile apps, REST interfaces, and the like.
 
 <!-- @} -->
 <!-- @{ h3: examples -->
-### Examples
+### [Examples](#kaml-aint-markup-language)
 
 Topics
 :   [Plain scalars](#plain-scalars) |
@@ -170,7 +170,7 @@ typeset -b image=...                    # Binary data encoded as Base64
 
 <!-- @} -->
 <!-- @{ h3: version -->
-### Version
+### [Version](#kaml-aint-markup-language)
 
 The [KAML] implementation has been stable over three decades. The [KAML] specification is still work-in-progress as many of the more
 powerful features of [KAML] have not yet been documented.
