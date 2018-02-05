@@ -1,5 +1,5 @@
 ---
-revision    : Mon Feb 05, 2018 19:55:46
+revision    : Mon Feb 05, 2018 19:59:27
 author      : Jean-Michel Marcastel
 title       : KAML ain't markup language
 ---
@@ -929,5 +929,6 @@ Documentation, bug reports, pull requests, and all other contributions are welco
 [SGML]:     https://en.wikipedia.org/wiki/Standard_Generalized_Markup_Language
 [TOML]:     https://en.wikipedia.org/wiki/TOML
 [YAML]:     https://en.wikipedia.org/wiki/YAML
+[XML]:      https://en.wikipedia.org/wiki/XML
 
 <!-- vim: set nu et tw=130 ts=8 sts=4 sw=4 ff=unix fo-=l fo+=tcroq2 fdm=marker fmr=@{,@} spell spelllang=en_gb :-->
