@@ -1,5 +1,5 @@
 ---
-revision    : Mon Feb 05, 2018 20:12:18
+revision    : Tue Feb 06, 2018 18:07:25
 author      : Jean-Michel Marcastel
 title       : KAML ain't markup language
 ---
@@ -9,8 +9,8 @@ title       : KAML ain't markup language
 
 Sections
 :   [Overview](#overview) |
-    [Examples](#examples) |
-    [Version](#version)
+    [Version](#version) |
+    [Examples](#examples)
 
 Next
 :   [Specifications](#specifications) |
@@ -21,14 +21,36 @@ Next
 ### [Overview](#kaml-aint-markup-language)
 
 [KAML] aims to be a minimal configuration file format that is easy to read by programs and humans alike. [KAML] is the formal
-specification of Korn shell _compound variables_ which have been around since the mid 1980s -- we have, with `ksh93`, a reference
-implementation and linter, and with `libast` a reference C implementation. With this heritage, [KAML] could be said to be _POSIX
-compliant_ -- though obviously this is an Open Group prerogative.
+specification of Korn shell _compound variables_ (renamed here _dictionaries_) which have been around since the mid 1980s -- we
+have, with `ksh93`, a reference implementation and linter, and with `libast` a reference C implementation. With this heritage,
+[KAML] could be said to be [POSIX] compliant -- though obviously this is an [Open Group] prerogative.
 
-[KAML] stands for _KAML ain't markup language_... it is Korn shell -- thank you Richard (Stallman)! Pronounced _camel_
+[KAML] stands for _KAML ain't markup language_... it's Korn shell (with GNU lineage). Pronounced _camel_
 (/ˈkæməl/), the acronym was chosen to sound like [YAML], for which [KAML] is intended to be a more flexible and extensible
-alternative. Like [YAML], [KAML] is a superset of [JSON]; [KAML] is a superset of [YAML] too! [KAML] aims to play well with [JSON]
-which is a de facto standard for mobile apps, REST interfaces, and the like.
+alternative. Like [YAML], [KAML] is a superset of [JSON] offering many extended features that are practical for configuration
+files, and less important to data exchange. [KAML] is a superset of [YAML] too; providing much of the functionality of [ASN-1] or
+[XSLT] transformations in the robust and simple syntax of [POSIX] shells.
+
+<!-- @} -->
+<!-- @{ h3: version -->
+### [Version](#kaml-aint-markup-language)
+
+The [KAML] reference implementation (i.e. Korn shell compound variables) has been stable over three decades. The [KAML]
+specification is still work-in-progress as many of the more powerful features of [KAML] have not yet been documented.
+
+| KAML Version    | Korn shell version  | Version notes                                                                          |
+| :-------------: | :-----------------: | :------------------------------------------------------------------------------------- |
+|             n/a | `ksh88`             | Korn shell (1988 incarnation). First _official_ appearance of compound variables.      |
+|             n/a | `ksh93`             | Korn shell (1993 incarnation). Reference implementation for KAML 0.1.0.                |
+|     [0.1.0-wip] | AJM 93u+ 2012-08-01 | First formal definition. Still in the workings. Implementation very stable.            |
+
+[0.1.0-wip]: https://github.com/ISLEcode/[KAML]
+
+-   [KAML] versioning follows [semantic versioning](https://semver.org) principles.
+-   Each version of [KAML] is bound to a release of the Korn shell which serves as the reference implementation of the
+    specification.
+-   [KAML] is maintained on GitHub (<https://github.com/ISLEcode/KAMP>)
+
 
 <!-- @} -->
 <!-- @{ h3: examples -->
@@ -37,7 +59,7 @@ which is a de facto standard for mobile apps, REST interfaces, and the like.
 Topics
 :   [Plain scalars](#plain-scalars) |
     [Scalars with type attributes](#scalars-with-type-attributes) |
-    [Indexed and associative arrays, compound variables](#indexed-and-associative-arrays-compound-variables) |
+    [Indexed and associative arrays, compound properties](#indexed-and-associative-arrays-compound-properties) |
     [Custom types and classes](#custom-types-and-classes) |
     [POSIX shell features](#posix-shell-features) |
     [Korn shell extensions](#korn-shell-extensions) |
@@ -75,8 +97,8 @@ hexfloat    rate=0.1234567              # Float represented in hexadecimal notat
 ```
 
 <!-- @} -->
-<!-- @{ indexed and associative arrays, compound variables-->
-#### [Indexed and associative arrays, compound variables](#examples)
+<!-- @{ indexed and associative arrays, compound properties-->
+#### [Indexed and associative arrays, compound properties](#examples)
 ```
 upper       see_also=(                  # Indexed array with uppercased items
     asn-1 ini json kaml sgml yaml xml
@@ -84,7 +106,7 @@ upper       see_also=(                  # Indexed array with uppercased items
 
 coordinates=(                           # Array of arrays
     ( a b c )                           #
-    ( i j k )                           # Indexed arrays, associative arrays and compound variables
+    ( i j k )                           # Indexed arrays, associative arrays and compound properties
     ( x y z )                           # allow recursive nesting.
 )
 
@@ -98,7 +120,7 @@ hash bookmarks=(                        # Associative array
     [YAML]=https://en.wikipedia.org/wiki/YAML
 )
 
-compound record=(                       # Compound variable
+compound record=(                       # Compound property
     server=192.168.1.1
     ports=( 8001 8001 8002 )
     connection_max=5000
@@ -124,7 +146,7 @@ website.label+=" (github)"              # Appending to a previous declared prope
 ```
 files=*                                 # Generate filenames matching a pattern
 files=**                                # Alternate syntax for recursive descent
-path=$PATH                              # Variable expansion
+path=$PATH                              # Property expansion
 system=$(uname -s)                      # Embed output of exec(3)
 ```
 
@@ -132,7 +154,7 @@ system=$(uname -s)                      # Embed output of exec(3)
 <!-- @{ korn shell extensions -->
 #### [Korn shell extensions](#examples)
 ```
-top_bin=${PATH%%:*}                     # Variable manipulation and conversions
+top_bin=${PATH%%:*}                     # Property manipulation and conversions
 content=$(< /etc/passwd )               # Slurp in files
 ```
 
@@ -169,42 +191,19 @@ typeset -b image=...                    # Binary data encoded as Base64
 <!-- @} -->
 
 <!-- @} -->
-<!-- @{ h3: version -->
-### [Version](#kaml-aint-markup-language)
-
-The [KAML] implementation has been stable over three decades. The [KAML] specification is still work-in-progress as many of the more
-powerful features of [KAML] have not yet been documented.
-
-| [KAML] Version  | Korn shell version  |
-|----------------:|--------------------:|
-|     [0.1.0-wip] | AJM 93u+ 2012-08-01 |
-
-[0.1.0-wip]: https://github.com/ISLEcode/[KAML]
-
-Guidelines:
-
--   [KAML] versioning will follow [semantic versioning](https://semver.org) principles.
--   Each version of [KAML] will be bound to a release of the Korn shell which serves as the reference implementation of the
-    specification.
--   The
-[github]: https://github.com/ISLEcode/[KAML]
-       repository of this repository tracks the very latest development and may contain
-    features and changes that do not exist on any released version.
-
-
-<!-- @} -->
 ## Specifications
 <!-- @{ toc -->
 
 Sections
 :   [General considerations](#general-considerations) |
-    [Comments](#comments) |
-    [Name/value pairs](#namevalue-pairs) |
+    [Identifiers](#identifiers) |
+    [Properties](#properties) |
     [Scalars](#scalars) |
-    [Indexed arrays](#indexed-arrays) |
-    [Associative arrays](#associative-arrays) |
-    [Compound variables](#compound-variables)
-    [Custom types](#custom-types)
+    [Arrays](#arrays) |
+    [Dictionaries](#dictionaries) |
+    [Custom types](#custom-types) |
+    [Arithmetic expressions](#arithmetic-expressions) |
+    [Comments](#comments) |
 
 Previous
 :   [Top](#kaml-aint-markup-language)
@@ -217,70 +216,108 @@ Next
 ### [General considerations](#specifications)
 
 -   KAML is Korn shell syntax
-    -   it is case sensitive
     -   character encoding is either ANSI ASCII or UTF-8
-    -   whitespace matches POSIX regexp class `[[:space:]]`
+    -   whitespace matches [POSIX] regexp class `[[:space:]]`
     -   `ksh -n` is the KAML linter
 -   KAML files should use the extension `.kml`.
 -   KAML files should follow UNIX conventions for newlines
 
 <!-- @} -->
-<!-- @{ h3: comments -->
-### [Comments](#specifications)
+<!-- @{ h3: identifiers -->
+### [Identifiers](#specifications)
 
-A hash symbol marks the rest of the line as a comment.
-
-```{.sh}
-# This is a full-line comment
-name="value" # This is a comment at the end of a line
+```{.ebnf}
+identifier          = identifier-first, { identifier-next } ;
+identifier-first    = ? [[:alpha:]] or "_" ? ;
+identifier-next     = ? [[:alnum:]] or "_" ? ;
 ```
+Identifiers are used to construct the name of properties. An identifier is a sequence of characters consisting of one or more
+characters in the [POSIX] _alnum_ character class (`A-Z`, `a-z` and `0-9`.) or an underscore (`_`). The first character cannot be
+a digit. There is no limit on how many characters an identifier may consist of. Identifiers are case-sensitive.
 
 <!-- @} -->
-<!-- @{ h3: name/value pairs -->
-### [Name/value pairs](#specifications)
+<!-- @{ h3: properties -->
+### [Properties](#specifications)
 
-The primary building block of a KAML document is the name/value pair.
-
-```{.sh}
-name=value
+```{.ebnf}
+kaml-stream         = { property-assignment | comment } ;
+property-assignment = [ typedef ], name, "=", value, [ comment ] ;
 ```
 
-1.  Names are on the left of the equals sign and values are on the right.
+Properties are the primary building block of a KAML documents.
 
-1.  A name cannot be an empty string.
+_Note_: No unquoted white space are allowed before or after the assignment operator (`=`).
 
-1.  The equal sign must not be preceded or followed by white space.
+```{.ebnf}
+name                = simple-name | compound-name ;
+simple-name         = identifier ;
+compound-name       = ( ".",  simplename
+                      | [ "." ],  simple-name, { ".", simple-name } ;
+```
 
-1.  The name must be a valid shell identifier (i.e. start with an underscore or an alphabetic character, and be composed of
-    zero or more alphanumeric characters or the underscore).
+Property names are either simple or compound. A simple variable name is an identifier. A compound property name is either:
 
-    <!-- TODO: myKeyName, my-key-name should be standardised to my_key_name -->
+-   an identifier preceded by a dot (`.`)
+-   more than one identifier each separated by a dot (`.`) and optionally preceded by a dot.
 
-1.  The dot in names is used to define the path of the property in the compound variable.
+_Recommendation_: naming conventions vary widely in flavour and type; consider providing utilities to normalise imported and/or
+exported property names such that users can continue using the naming conventions to which they are accustomed. For instance
+`myPropertyName`, `my-property-name`, `My property name` all map to a _canonical form_ used in KAML: `my_property_name`.
 
-    For instance:
-    ```
-    my.address.zicode=1201
-    ```
-    would be represented in JSON as:
-    ```{.json}
-    {
-        "my": {
-            "address": {
-                "zipcode": "1201"
-            }
-        }
-    }
-    ```
+```{.ebnf}
+value               = [ scalar | array | dictionary | custom ] ;
+```
+
+```
+all-characters      = ? all UTF-8 characters ? ;
+identifier-first    = ? [[:alpha]] or "_" ? ;
+identifier-next     = ? [[:alnum:]] or "_" ? ;
+white-space         = ? UTF-8 white space characters ? ;
+```
+
+
 
 1.  The name can be preceded by a type specification (see [type specifications](#type-spectifications) below.
 
 1.  The right hand side value can be either a [scalar](#scalars), an [indexed array](#indexed-arrays), an [associative
-    array](#associative-array), a [compound variable](#compound-variables), or [custom types](#custom-types).
+    array](#associative-array), a [compound variable](#compound-properties), or [custom types](#custom-types).
 
 <!-- @} -->
 <!-- @{ h3: scalars -->
 ### [Scalars](#specifications)
+
+Some characters have a special meaning KAML files or the environment in which they are used -- the dollar (`$`) sign for instance.
+To remove that meaning, you must quote the character. Single characters can be _escaped_ -- that is they can be preceded with the
+backslash character (`\`) which _escapes_ their default meaning. You can quote a string of characters by enclosing them in:
+
+-   literal (single) quotes (`'...'`) to remove the special meaning of all characters except the single quote itself (`'`).
+
+-   grouping (double) quotes (`"..."`) to remove the special meaning of all characters except the dollar sign (`$`), the backslash
+    (`\`) and the backtick (````). If the dollar sign (`$`) is not escaped, then property substitution is done inside the double
+    quotes.
+
+-   ANSI C strings (`$'...'`) to remove the special meaning of all characters except the ANSI C escape sequences:
+
+    | Escape sequence   | Character                                                                     |
+    | :---------------- | :---------------------------------------------------------------------------- |
+    | `\a`              | Bell character                                                                |
+    | `\b`              | Backspace                                                                     |
+    | `\f`              | Formfeed                                                                      |
+    | `\n`              | Newline                                                                       |
+    | `\r`              | Return                                                                        |
+    | `\t`              | Tab                                                                           |
+    | `\v`              | Vertical tab                                                                  |
+    | `\\`              | Backslash                                                                     |
+    | `\E`              | Escape character                                                              |
+    | `\0x`             | The 8-bit character whose ASCI code is the 1-, 2-, or 3-digit octal number `x`|
+
+-   message grouping (double) quotes ('$"..."), the same as grouping quotes except that the string will be looked up in
+    a locale-specific message dictionary and replaced if found. The dollar sign (`$`) is always deleted.
+
+    ```{.sh}
+    LANG=fr-FR
+    greeting=$"Welcome"         # := Bienvenu
+    ```
 
 There are four ways to express strings: basic, multi-line basic, literal, and
 multi-line literal. All strings must contain only valid UTF-8 characters.
@@ -403,106 +440,254 @@ Control characters other than tab are not permitted in a literal string. Thus,
 for binary data it is recommended that you use Base64 or another suitable ASCII
 or UTF-8 encoding. The handling of that encoding will be application specific.
 
-#### Integer
+<!-- @} -->
+<!-- @{ h3: arrays --->
+### [Arrays](#specifications)
 
-Integers are whole numbers. Positive numbers may be prefixed with a plus sign.
-Negative numbers are prefixed with a minus sign.
+An array is a property that can store multiple values, where each value is associated with a subscript.
 
-```{.sh}
-int1=+99
-int2=42
-int3=0
-int4=-17
+There are two types of arrays -- indexed arrays and associative arrays. The subscript for indexed arrays is an arithmetic
+expression; the subscript for an associative array is an arbitrary string. You can specify a subscript with any property using the
+array syntax notation: `name[subscript]`. The property for an indexed array can be any [arithmetic
+expression](#arithmetic-expressions) that evaluates between 0 and some implementation-defined value that is at least 4095. The
+subscript of an associative array can be any string.
+
+You can assign values to array elements individually with property assignment commands. You can assign values to indexed array
+elements sequentially, starting at 0, using the compound assignment `name=( value ... )`. You can assign values to an indexed
+array using the compound assignment `hash name=( [subscript]=value ... )`.
+
+Alternatively you can assign a list of values to an array sequentially: `name[subscript]=value`. You also the subscript-less
+syntax  for indexed arrays `name+=( value)`; the equivalent form for associative arrays requires the subscript:
+`name+=( [subscript]=value )`.
+
+
+```
+digits=( one two three four )
+digits[4]=five
+digits+=( six seven eight nine ten)
+
+alphabet=( [a]=alpha [b]=bravo [c]=charlie )
+alphabet[d]=delta
+alphabet+=( [e]=echo [f]=foxtrot ... )
 ```
 
-For large numbers, you may use underscores between digits to enhance
-readability. Each underscore must be surrounded by at least one digit on each
-side.
+_Note_: using _Perlish_ naming conventions, we interchangeably use the term _hash_ for associative arrays, and the bare word
+_array_ for indexed arrays. For greater legibility of KAML files, the singular form of these alternate names can be used to
+specify the type of a property.
 
-```{.sh}
-int5=1_000
-int6=5_349_221
-int7=1_2_3_4_5     # VALID but discouraged
+```
+array digits=( one two three ... )
+hash alphabet=( [a]=alpha [b]=bravo [c]=charlie ...)
 ```
 
-Leading zeros are not allowed. Integer values `-0` and `+0` are valid and
-identical to an unprefixed zero.
+You can refer to previously defined properties (or environment variables) in right hand side values using the conventional UNIX
+brace syntax:
 
-Non-negative integer values may also be expressed in hexadecimal, octal, or
-binary. In these formats, leading zeros are allowed (after the prefix). Hex
-values are case insensitive. Underscores are allowed between digits (but not
-between the prefix and the value).
-
-```{.sh}
-# hexadecimal with prefix `0x`
-hex1=0xDEADBEEF
-hex2=0xdeadbeef
-hex3=0xdead_beef
-
-# octal with prefix `0o`
-oct1=0o01234567
-oct2=0o755 # useful for Unix file permissions
-
-# binary with prefix `0b`
-bin1=0b11010110
+```
+colour=([apple]=red [grape]=purple [banana]=yellow)
+prefered_colour=${colour[banana]}
 ```
 
-64 bit (signed long) range expected (−9,223,372,036,854,775,808 to
-9,223,372,036,854,775,807).
+_Note_: Omitting the braces is not a syntax error, but yield a different result as expansion will be applied to the first
+identifier in the name, here `$colour`; which, if it doesn't exist, will be silently replaced with an empty string. In Korn shell
+environments you can force the shell to complain using the `set -u` option whenever it encounters a variable (or property) that
+has not been set.
 
-#### Float
+When you reference an array without specifying a subscript, then the subscript of the first element in the array is assumed. The
+special subscripts `@` and `*` refer to all the elements in the array. As for regular shell variables, the `!` operand can be used
+to expand the list of subscripts in an array. The size operator `#` can be used in place of `!` to obtain the number of elements
+in an array. Using our previous example, this can be summarised as:
 
-Floats should be implemented as IEEE 754 binary64 values.
+```
+${colour[apple]}    # := red
+${colour[]}         # := red
+${!colour[@]}       # := apple banana grape
+${colour[@]}        # := red yellow purple
+${#colour[@]}       # := 3
+$colour[apple]      # := [apple] (if colour is undefined)
+```
+_Note_: The associative array is automatically sorted alphabetically.
 
-A float consists of an integer part (which follows the same rules as integer
-values) followed by a fractional part and/or an exponent part. If both a
-fractional part and exponent part are present, the fractional part must precede
-the exponent part.
+
+
+
+69-70 132 136 144 179 183 188 189 190 215 323 
+
+to assign multiple elements to an associative array.
+
+Arrays are square brackets with values inside. Whitespace is ignored. Elements
+are separated by commas. Data types may not be mixed (different ways to define
+strings should be considered the same type, and so should arrays with different
+element types).
 
 ```{.sh}
+arr1=( 1 2 3 )
+arr2=( red yellow green )
+arr3=( ( 1 2 ) (3 4 5) )
+arr4=( all strings are the same type)
+arr5=( ( 1 2 ) (a b c) )
+```
+
+<!-- @} -->
+<!-- @{ h3: dictionaries -->
+### [Dictionaries](#specifications)
+
+A dictionary is a property whose name consists of more than one identifier. A compound assignment is an assignment of the
+form:
+
+```{.sh}
+name=( word ... )
+```
+
+which is used for array assignment as described earlier, or
+
+```{.sh}
+name=( assignment ... )
+```
+
+where `assignment` can be a _simple assignment_ or a _compound assignment_. For each `assignment` in the list, the property
+`name.assignment` is assigned to. In addition, the value of `name`, `$name`, consists of a list of assignments enclosed in
+parantheses that is equivalent to an assignment for all compound properties whose name begins with `name`.
+
+Once the compound property `name` has been created, you can operate on each member independently. Properties of the form `name`,
+created or deleted, will be created or deleted from the compound property `name`.
+
+```{.sh}
+picture=(
+    bitmap=$PICTDIR/fruit
+    colour=([apple]=red [grape]=purple [banana]=yellow)
+    size=( typeset -E x=8.5 y=11.0)
+)
+```
+
+In JSON land, that would give you the following structure.
+
+```{.json}
+{
+    "picture": {
+        "bitmap": "/path/to/pict/dir/fruit",
+        "colour": {
+            "apple": "red",
+            "grape": "purple",
+            "banana": "yellow"
+        },
+        "size": {
+            "x": 8.5,
+            "y": 11.0
+        }
+    }
+}
+```
+
+<!-- @} -->
+<!-- @{ h3: typedefs -->
+### [Typedefs](#specifications)
+
+You can assign each property one or more predefined types or use the `typeset` typesetting command to build
+
+
+
+<!-- @} -->
+<!-- @{ h3: custom types -->
+### [Custom types](#specifications)
+
+Using the `typeset` command, you can assign one or more of the following attributes to a property.
+
+Uppercase (`-u`)
+:   Change lower-case characters to upper-case when the property is expanded.
+
+    ```
+    typeset -u x=abc    # := ABC
+    ```
+
+Lowercase (`-l`)
+:   Change upper-case characters to lower-case when the property is expanded.
+
+
+Floating point, scientific notation (`-E` or `-En`)
+:   Evaluate the property's value as an arithmetic floating point expression. Output should match the `%g` format of the
+    C language _printf(3)_ function. The `n` in `En` is the number of significant digits; the default is 10.
+
+    You can use the predefined `float` alias to declear floating point variables.
+
+Floating point, fixed precision (`-F` or `-Fn`)
+:   Evaluate the property's value as an arithmetic floating point expression. Output should match the `%f` format of the
+    C language _printf(3)_ function. The `n` in `En` is the number of significant digits; the default is 10.
+
+Integer (`-i` or `-ibase`)
+:   Evaluate the property's value as an arithmetic integer expression. The `base` is the integer's arithmetic base, and can be
+    a decimal integer between 2 and 64.
+
+    You can use the predefined `integer` to declare integer variables.
+
+    ```
+    integer x=6
+    typeset -i8 y=x+x # := 8#14
+    ```
+
+Associative array (`-A`)
+:   Define an associative array, as opposed to an indexed array. The subscript for an associative array element is an arbitrary
+    string.
+
+Left-justified (`-L` or `-Lwidth`)
+:   Left justify the character's of the property's value to fit `width` and put trailing spaces, tf needed. The `width` is
+    any positive number. If unspecified, use the number of characters of the first value assigned to the property.
+
+    If you assign a value that is too big to fit `width`, the value will be truncated to match the specified width.
+
+
+#### Integer <!-- @{ -->
+
+```{.ebnf}
+integer             = base10-integer | altbase-integer | arithmetic expression ;
+base10-integer      = [ "+" | "-" ], whole-number ;
+altbase-integer     = base "#" whole-number ;
+
+whole-number        = (? any non-negative whole number ?) ;
+base                = (? a decimal integer between 2 and 64 ?) ;
+```
+
+Integers are decimal (i.e. base 10) whole numbers. Positive numbers may be prefixed with a plus operator (`+`). Negative numbers
+are prefixed with a minus operator (`-`). KAML allows to assign an integer using an arithmetic base between 2 and 64. A number in
+a base greater than 10 uses upper-case and lower-case letters of the alphabet to represent a digit. For instance `16#b` or `16#B`
+represents the value 11 in base 16. For bases greater than 36, upper-case and lower-case letters are distinct. The characers `@`
+and `_` are the two highest digits. For example `40#b` represents 11, whereas `40#B` represents 37, both in base 40. Anything
+after a decimal point is truncated. Leading zeros are dropped.
+
+<!-- @} -->
+#### Float <!-- @{ -->
+
+```{.ebnf}
+float               = base10-integer, [ decimal-number ], [ exponent ] ;
+decimal-number      = decimal-separator, whole-number ;
+exponent            = [ "E" | "e" ], whole-number ;
+
+decimal-separator   = (? "." -- the decimal separator is comma in some locales ?) ;
+```
+
+Floats should be implemented as IEEE 754 binary64 values. A float consists of an integer part (which follows the same rules as
+integer values) optionally followed by a fractional part and/or an exponent part. If both a fractional part and exponent part are
+present, the fractional part must precede the exponent part.
+
+Some examples:
+
+```
 # fractional
-flt1=+1.0
-flt2=3.1415
-flt3=-0.01
+float1=+1.0 float2=3.1415 float3=-0.01
 
 # exponent
-flt4=5e+22
-flt5=1e6
-flt6=-2E-2
+float4=5e+22 float5=1e6 float6=-2E-2
 
 # both
-flt7=6.626e-34
+float7=6.626e-34
 ```
 
-A fractional part is a decimal point followed by one or more digits.
+Float values `-0.0` and `+0.0` are valid and should map according to IEEE 754 (i.e. the unary minus is remembered.)
 
-An exponent part is an E (upper or lower case) followed by an integer part
-(which follows the same rules as integer values).
+_Note_: though desirable, there is currently no support for special float values such as _infinity_, _pi_ or _not a number_.
 
-Similar to integers, you may use underscores to enhance readability. Each
-underscore must be surrounded by at least one digit.
-
-```{.sh}
-flt8=9_224_617.445_991_228_313
-```
-
-Float values `-0.0` and `+0.0` are valid and should map according to IEEE 754.
-
-Special float values can also be expressed. They are always lowercase.
-
-```{.sh}
-# infinity
-sf1=inf  # positive infinity
-sf2=+inf # positive infinity
-sf3=-inf # negative infinity
-
-# not a number
-sf4=nan  # actual sNaN/qNaN encoding is implementation specific
-sf5=+nan # same as `nan`
-sf6=-nan # valid, actual encoding is implementation specific
-```
-
-#### Boolean
+<!-- @} -->
+#### Boolean <!-- @{ -->
 
 Booleans are just the tokens you're used to. Always lowercase.
 
@@ -511,7 +696,8 @@ bool1=true
 bool2=false
 ```
 
-#### Offset Date-Time
+<!-- @} -->
+#### Offset Date-Time <!-- @{ -->
 
 To unambiguously represent a specific instant in time, you may use an
 [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time with offset.
@@ -534,7 +720,8 @@ millisecond precision is expected. If the value contains greater precision than
 the implementation can support, the additional precision must be truncated, not
 rounded.
 
-#### Local Date-Time
+<!-- @} -->
+#### Local Date-Time <!-- @{ -->
 
 If you omit the offset from an [RFC 3339](http://tools.ietf.org/html/rfc3339)
 formatted date-time, it will represent the given date-time without any relation
@@ -552,7 +739,8 @@ millisecond precision is expected. If the value contains greater precision than
 the implementation can support, the additional precision must be truncated, not
 rounded.
 
-#### Local Date
+<!-- @} -->
+#### Local Date <!-- @{ -->
 
 If you include only the date portion of an
 [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time, it will
@@ -562,7 +750,8 @@ represent that entire day without any relation to an offset or timezone.
 ld1=1979-05-27
 ```
 
-##### Local Time
+<!-- @} -->
+##### Local Time <!-- @{ -->
 
 If you include only the time portion of an [RFC
 3339](http://tools.ietf.org/html/rfc3339) formatted date-time, it will represent
@@ -580,166 +769,73 @@ the implementation can support, the additional precision must be truncated, not
 rounded.
 
 <!-- @} -->
-<!-- @{ h3: indexed arrays --->
-### [Indexed arrays](#specifications)
 
-Arrays are square brackets with values inside. Whitespace is ignored. Elements
-are separated by commas. Data types may not be mixed (different ways to define
-strings should be considered the same type, and so should arrays with different
-element types).
-
-```{.sh}
-arr1=( 1 2 3 )
-arr2=( red yellow green )
-arr3=( ( 1 2 ) (3 4 5) )
-arr4=( all strings are the same type)
-arr5=( ( 1 2 ) (a b c) )
-```
+64 bit (signed long) range expected (−9,223,372,036,854,775,808 to 9,223,372,036,854,775,807).
 
 <!-- @} -->
-<!-- @{ h3: associative arrays -->
-### [Associative arrays](#specifications)
+<!-- @{ h3: arithmetic expressions -->
+### [Arithmetic expressions](#specifications)
 
-Tables (also known as hash tables or dictionaries) are collections of key/value
-pairs. They appear in square brackets on a line by themselves. You can tell them
-apart from arrays because arrays are only ever values.
+When a scalar is explicitly typed as an integer or a float, the right hand side can be an arithmetic expression, hereafter simply
+called _expression_. An expression is a constant, a property, an environment variable, or is constructed with one of the following
+operator(s) -- listed here from highest to lowest precedence.
 
-```{.sh}
-table1=(
-    [key1]="some string"
-    [key2]=123
-)
+| #.    | Operator                          | Purpose                                                                            |
+| :---: | :-------------------------------- | :--------------------------------------------------------------------------------- |
+| (a)   | `( expression )`                  | Overrides precedence rules                                                         |
+| (b)   | `"++" name | name "++"`           | Prefix/postfix increment of property _name_'s value                                |
+|       | `"--" name | name "--"`           | Prefix/postfix decrement of property _name_'s value                                |
+|       | `"+" expression`                  | Unary plus                                                                         |
+|       | `"-" expression`                  | Unary minus                                                                        |
+|       | `"!" expression`                  | Logical negation (the value is 0 for any _expression_ whose value is not 0)        |
+|       | `"~" expression`                  | Bitwise negation                                                                   |
+| (c)   | `expression "*" expression`       | Multiplicatio                                                                      |
+|       | `expression "/" expression`       | Division                                                                           |
+|       | `expression "%" expression`       | Remainder of 1^st^ _expression_ after dividing by the 2^nd^ _expression_           |
+| (d)   | `expression "+" expression`       | Addition                                                                           |
+|       | `expression "-" expression`       | Subtraction                                                                        |
+| (e)   | `expression "<<" expression`      | Left shift 1^st^ _expression_ by the number of bits given by the 2^nd^ expression  |
+|       | `expression ">>" expression`      | Right shift 1^st^ _expression_ by the number of bits given by the 2^nd^ expression |
+| (f)   | `expression "<=" expression`      | Less than or equal to                                                              |
+|       | `expression ">=" expression`      | Greater than or equal                                                              |
+|       | `expression "==" expression`      | Equal to                                                                           |
+|       | `expression "!=" expression`      | Not equal to                                                                       |
+| (g)   | `expression "&" expression`       | Bitwise _AND_                                                                      |
+|       | `expression "^" expression`       | Bitwise _XOR_ (exclusive _OR_)                                                     |
+|       | `expression "|" expression`       | Bitwise _OR_                                                                       |
+| (h)   | `expression "&&" expression`      | Logical _AND_ (if the 1^st^ expression is 0, then the 2^nd^ is not evaluated)      |
+| (i)   | `expression "||" expression`      | Logical _OR_ (id the 1^st^ expression is non 0, then the 2^nd^ is not evaluated)   |
+| (j)   | `expr. "?" expr. ":" expr.`       | Conditional operator.                                                              |
+| (k)   | `name "=" expression`             | Assignment.                                                                        |
+| (l)   | `name op "=" expression`          | Compound assignment (`op`: `[*/%^|+-]`,  `<<`, or `>>`)                            |
+| (m)   | `expression "," expression`       | Comman operator (both expressions are evaluated)                                   |
 
-table2=(
-    [key1]="another string"
-    [key2]=456
-)
+
+Arithmetic expansion.
+
+Each `$(( ... ))` is replaced by the value of the arithmetic expresion within the double parenthesis.
+
 ```
+x=$(( RANDOM%5 ))
 
 <!-- @} -->
-<!-- @{ h3: compound variables -->
-### [Compound variables](#specifications)
+<!-- @{ h3: comments -->
+### [Comments](#specifications)
 
-The last type that has not yet been expressed is an array of tables. These can
-be expressed by using a table name in double brackets. Each table with the same
-double bracketed name will be an element in the array. The tables are inserted
-in the order encountered. A double bracketed table without any key/value pairs
-will be considered an empty table.
-
-```{.sh}
-[[products]]
-name="Hammer"
-sku=738594937
-
-[[products]]
-
-[[products]]
-name="Nail"
-sku=284758393
-color="gray"
+```{.ebnf}
+comment                 = plain-comment | she-bang | embedded-documentation
+plain-comment           = [ { white-space } ], "#" any-character-except-newline, newline
+she-bang                = "#!" non-white-space any-character-except-newline, newline
+                          (* a she-bang can only appear on the first line of the file *)
+embedded-documentation  = [ { white-space } ], "#!" white-space any-character-except-newline, newline
 ```
 
-In JSON land, that would give you the following structure.
-
-```json
-{
-  "products": [
-    { "name": "Hammer", "sku": 738594937 },
-    { },
-    { "name": "Nail", "sku": 284758393, "color": "gray" }
-  ]
-}
-```
-
-You can create nested arrays of tables as well. Just use the same double bracket
-syntax on sub-tables. Each double-bracketed sub-table will belong to the most
-recently defined table element above it.
-
-```{.sh}
-[[fruit]]
-  name="apple"
-
-  [fruit.physical]
-    color="red"
-    shape="round"
-
-  [[fruit.variety]]
-    name="red delicious"
-
-  [[fruit.variety]]
-    name="granny smith"
-
-[[fruit]]
-  name="banana"
-
-  [[fruit.variety]]
-    name="plantain"
-```
-
-The above [KAML] maps to the following JSON.
-
-```json
-{
-  "fruit": [
-    {
-      "name": "apple",
-      "physical": {
-        "color": "red",
-        "shape": "round"
-      },
-      "variety": [
-        { "name": "red delicious" },
-        { "name": "granny smith" }
-      ]
-    },
-    {
-      "name": "banana",
-      "variety": [
-        { "name": "plantain" }
-      ]
-    }
-  ]
-}
-```
-
-Attempting to append to a statically defined array, even if that array is empty
-or of compatible type, must produce an error at parse time.
-
-```{.sh}
-# INVALID [KAML] DOC
-fruit=[]
-
-[[fruit]] # Not allowed
-```
-
-Attempting to define a normal table with the same name as an already established
-array must produce an error at parse time.
+A hash symbol marks the rest of the line as a comment.
 
 ```
-# INVALID [KAML] DOC
-[[fruit]]
-  name="apple"
-
-  [[fruit.variety]]
-    name="red delicious"
-
-  # This table conflicts with the previous table
-  [fruit.variety]
-    name="granny smith"
+# This is a full-line comment
+name="value" # This is a comment at the end of a line
 ```
-
-You may also use inline tables where appropriate:
-
-```{.sh}
-points=( ( x=1 y=2 z=3 )
-           ( x=7 y=8 z=9 )
-           ( x=2 y=4 z=8 ) )
-```
-
-<!-- @} -->
-<!-- @{ h3: custom types -->
-### [Custom types](#specifications)
-
 
 <!-- @} -->
 ## About
@@ -768,23 +864,20 @@ easy to maintain; yet they primarily target flat data structures and have no dat
 attempt to make [INI] files overcome the aforementioned limitations, at the cost of extra verbosity.
 
 [KAML] pre-dates all these formats -- except perhaps the INI format. [KAML] is nothing but a formal definition of the _compound
-variable_ syntax available in the Korn shell since the mid 1980s. [KAML] came to life in Korn shell pretty much for the same reasons
+variables_ syntax available in the Korn shell since the mid 1980s. [KAML] came to life in Korn shell pretty much for the same reasons
 as JSON appeared in Javascript; to allow easy interchange of structured data sets. Indeed an often overlooked feature of Korn
-shell is that it natively supports classes, type definitions, enumerations and the so-called compound variables that can be
-compared to `struct` definitions in C.
+shell is that it natively supports classes, type definitions, enumerations and the so-called compound variables, called
+_dictionaries_ in this specification and which compare to C language `struct` declarations.
 
-maps easily to ubiquitous data types. JSON is great for serializing
-data that will mostly be read and written by computer programs. Where
-[KAML] differs from JSON is its emphasis on being easy for humans to
-read and write. Comments are a good example: they serve no purpose
-when data is being sent from one program to another, but are very
-helpful in a configuration file that may be edited by hand.
+[KAML] is easier to read by humans than [JSON] and tagged markups inherited form the [SGML] syntax. It does not reach the
+readibility of [YAML] which was a design consideration. The slightly more verbose syntax of [KAML] will probably remain unchanged
+as long as the pre-requisite for [KAML] to be natively understood by the Korn shell remains. Korn shell (and the associated
+`libast` C language library) are the reference implementation for [KAML]. Should we one day decide to write a parser for the
+shell, then extra readability would be a high priority. This is not however on the road map.
 
-The YAML format is oriented towards configuration files just like
-[KAML]. For many purposes, however, YAML is an overly complex
-solution. [KAML] aims for simplicity, a goal which is not apparent in
-the YAML specification:
-http://www.yaml.org/spec/1.2/spec.html
+[KAML] is immediately available to most, if not all, programming language without writing a single line of parsing code in the
+target programming language, just a bit of shell scripting wizardry. Samples will be added to this specification as both proof of
+concept and getting started examples.
 
 <!-- @} -->
 <!-- @{ get involved -->
@@ -795,13 +888,18 @@ Documentation, bug reports, pull requests, and all other contributions are welco
 <!-- @} -->
 <!-- @{ bookmarks -->
 
-[ASN-1]:    https://en.wikipedia.org/wiki/Abstract_Syntax_Notation_One
-[INI]:      https://en.wikipedia.org/wiki/INI_file
-[JSON]:     https://en.wikipedia.org/wiki/JSON
-[KAML]:     https://github.com/ISLEcode/KAML
-[SGML]:     https://en.wikipedia.org/wiki/Standard_Generalized_Markup_Language
-[TOML]:     https://en.wikipedia.org/wiki/TOML
-[YAML]:     https://en.wikipedia.org/wiki/YAML
-[XML]:      https://en.wikipedia.org/wiki/XML
+[ASN-1]:        https://en.wikipedia.org/wiki/Abstract_Syntax_Notation_One
+[EBNF]:         https://en.wikipedia.org/wiki/Extended_Backus–Naur_form
+[INI]:          https://en.wikipedia.org/wiki/INI_file
+[JSON]:         https://en.wikipedia.org/wiki/JSON
+[KAML]:         https://github.com/ISLEcode/KAML
+[Open Group]:   http://www.opengroup.org
+[POSIX]:        https://fr.wikipedia.org/wiki/POSIX
+[SGML]:         https://en.wikipedia.org/wiki/Standard_Generalized_Markup_Language
+[SheBang]:      https://en.wikipedia.org/wiki/Shebang_(Unix)
+[TOML]:         https://en.wikipedia.org/wiki/TOML
+[XML]:          https://en.wikipedia.org/wiki/XML
+[XSLT]:         https://en.wikipedia.org/wiki/XSLT
+[YAML]:         https://en.wikipedia.org/wiki/YAML
 
 <!-- vim: set nu et tw=130 ts=8 sts=4 sw=4 ff=unix fo-=l fo+=tcroq2 fdm=marker fmr=@{,@} spell spelllang=en_gb :-->
