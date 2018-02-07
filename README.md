@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 16:34:20
+revision    : Wed Feb 07, 2018 16:50:40
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -50,7 +50,7 @@ specification is still work-in-progress as many of the more powerful features of
 -   [KAML] versioning follows [semantic versioning](https://semver.org) principles.
 -   Each version of [KAML] is bound to a release of the Korn shell which serves as the reference implementation of the
     specification.
--   [KAML] is maintained on GitHub (<https://github.com/ISLEcode/KAMP>)
+-   [KAML] is maintained on GitHub (<https://github.com/ISLEcode/KAML>)
 
 
 <!-- @} -->
