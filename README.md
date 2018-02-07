@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 16:32:07
+revision    : Wed Feb 07, 2018 16:33:40
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -322,6 +322,7 @@ boolean         := (? truthness expressed as 0 or 1 ?) ;
 ```
 
 [KAML] provides extensive features to handle scalar values which represent numbers, be they integers or floating point numbers.
+
 #### [Integers](#numbers) <!-- @{ -->
 
 ```{.ebnf}
@@ -440,7 +441,7 @@ Nonetheless manipulation of times and dates is a necessity. [KAML] addresses thi
 
 1.  A means of converting scalar representations to numeric values, and vis-versa.
 
-    ```
+    ```{.sh}
     # A time represented as a number
     integer number=1518013975
 
