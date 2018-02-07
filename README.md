@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 14:38:46
+revision    : Wed Feb 07, 2018 14:43:23
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -7,8 +7,6 @@ author      : Jean-Michel Marcastel
 
 ## KAML ain't markup language
 <!-- @{ toc -->
-
-<div style="font-size: 80%">
 
 Sub-sections
 :   [Overview](#overview) |
@@ -18,8 +16,6 @@ Sub-sections
 Next sections
 :   [Specifications](#specifications) |
     [About](#about)
-
-</div>
 
 <!-- @} -->
 <!-- @{ h3: overview -->
@@ -199,8 +195,6 @@ typeset -b image=...                    # Binary data encoded as Base64
 ## Specifications
 <!-- @{ toc -->
 
-<div style="font-size: 80%">
-
 Sub-sections
 :   [Overview](#overview) |
     [Identifiers](#identifiers) |
@@ -217,8 +211,6 @@ Previous section
 
 Next section
 :   [About](#about)
-
-</div>
 
 <!-- @} -->
 <!-- @{ h3: overview -->
@@ -885,16 +877,12 @@ merged with other data.
 ## About
 <!-- @{ toc -->
 
-<div style="font-size: 80%">
-
 Sub-sections
 :   [Comparison with other formats](#comparison-with-other-formats) |
     [Get involved](#get-involved)
 
 Previous sections
 :   [Specifications](#specifications), [Top](#kaml-aint-markup-language)
-
-</div>
 
 <!-- @} -->
 <!-- @{ comparison with other formats -->
