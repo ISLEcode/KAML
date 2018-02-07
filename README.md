@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 16:33:40
+revision    : Wed Feb 07, 2018 16:34:20
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -441,7 +441,7 @@ Nonetheless manipulation of times and dates is a necessity. [KAML] addresses thi
 
 1.  A means of converting scalar representations to numeric values, and vis-versa.
 
-    ```{.sh}
+    ```sh
     # A time represented as a number
     integer number=1518013975
 
