@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 09:34:10
+revision    : Wed Feb 07, 2018 09:38:36
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -607,14 +607,6 @@ In JSON land, that would give you the following structure.
 ```
 
 <!-- @} -->
-<!-- @{ h3: typedefs -->
-### [Typedefs](#specifications)
-
-You can assign each property one or more predefined types or use the `typeset` typesetting command to build
-
-
-
-<!-- @} -->
 <!-- @{ h3: custom types -->
 ### [Custom types](#specifications)
 
@@ -665,10 +657,11 @@ Left-justified (`-L` or `-Lwidth`)
     If you assign a value that is too big to fit `width`, the value will be truncated to match the specified width.
 
 
-#### Offset Date-Time <!-- @{ -->
+#### Date-Time <!-- @{ -->
 
-To unambiguously represent a specific instant in time, you may use an
-[RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time with offset.
+<span style="color:red">This section has been ripped from [TOML] with the intent to adapt it in [KAML]</span>
+
+To unambiguously represent a specific instant in time, you may use an [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time with offset.
 
 ```{.sh}
 odt1=1979-05-27T07:32:00Z
@@ -676,65 +669,38 @@ odt2=1979-05-27T00:32:00-07:00
 odt3=1979-05-27T00:32:00.999999-07:00
 ```
 
-For the sake of readability, you may replace the T delimiter between date and
-time with a space (as permitted by RFC 3339 section 5.6).
+The precision of fractional seconds is implementation specific, but at least millisecond precision is expected. If the value
+contains greater precision than the implementation can support, the additional precision must be truncated, not rounded.
 
-```{.sh}
-odt4=1979-05-27 07:32:00Z
-```
-
-The precision of fractional seconds is implementation specific, but at least
-millisecond precision is expected. If the value contains greater precision than
-the implementation can support, the additional precision must be truncated, not
-rounded.
-
-<!-- @} -->
-#### Local Date-Time <!-- @{ -->
-
-If you omit the offset from an [RFC 3339](http://tools.ietf.org/html/rfc3339)
-formatted date-time, it will represent the given date-time without any relation
-to an offset or timezone. It cannot be converted to an instant in time without
-additional information. Conversion to an instant, if required, is implementation
-specific.
+If you omit the offset from an [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time, it will represent the given
+date-time without any relation to an offset or timezone. It cannot be converted to an instant in time without additional
+information. Conversion to an instant, if required, is implementation specific.
 
 ```{.sh}
 ldt1=1979-05-27T07:32:00
 ldt2=1979-05-27T00:32:00.999999
 ```
 
-The precision of fractional seconds is implementation specific, but at least
-millisecond precision is expected. If the value contains greater precision than
-the implementation can support, the additional precision must be truncated, not
-rounded.
+The precision of fractional seconds is implementation specific, but at least millisecond precision is expected. If the value
+contains greater precision than the implementation can support, the additional precision must be truncated, not rounded.
 
-<!-- @} -->
-#### Local Date <!-- @{ -->
-
-If you include only the date portion of an
-[RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time, it will
-represent that entire day without any relation to an offset or timezone.
+If you include only the date portion of an [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time, it will represent
+that entire day without any relation to an offset or timezone.
 
 ```{.sh}
 ld1=1979-05-27
 ```
 
-<!-- @} -->
-##### Local Time <!-- @{ -->
-
-If you include only the time portion of an [RFC
-3339](http://tools.ietf.org/html/rfc3339) formatted date-time, it will represent
-that time of day without any relation to a specific day or any offset or
-timezone.
+If you include only the time portion of an [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time, it will represent
+that time of day without any relation to a specific day or any offset or timezone.
 
 ```{.sh}
 lt1=07:32:00
 lt2=00:32:00.999999
 ```
 
-The precision of fractional seconds is implementation specific, but at least
-millisecond precision is expected. If the value contains greater precision than
-the implementation can support, the additional precision must be truncated, not
-rounded.
+The precision of fractional seconds is implementation specific, but at least millisecond precision is expected. If the value
+contains greater precision than the implementation can support, the additional precision must be truncated, not rounded.
 
 <!-- @} -->
 
