@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 08:08:30
+revision    : Wed Feb 07, 2018 17:29:50
 title       : KAML ain't markup language
 subtitle    : Licensing
 author      : Jean-Michel Marcastel

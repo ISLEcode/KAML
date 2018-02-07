@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 16:50:40
+revision    : Wed Feb 07, 2018 17:29:51
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
