@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 07:37:39
+revision    : Wed Feb 07, 2018 07:40:16
 subject     : KAML licensing
 ---
 
@@ -123,7 +123,7 @@ m.  You means the individual or entity exercising the Licensed Rights under this
 
 #### Section 2 -- Scope.
 
-a.  License grant.
+A.  License grant.
 
     1.  Subject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free,
         non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:
@@ -161,7 +161,7 @@ a.  License grant.
         are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by,
         the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).
 
-b.  Other rights.
+B.  Other rights.
 
     1.  Moral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy,
         and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert
