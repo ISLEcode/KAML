@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 09:27:40
+revision    : Wed Feb 07, 2018 09:29:46
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -419,8 +419,8 @@ following operator(s) -- listed here from highest to lowest precedence.
 | #.    | Operator                          | Purpose                                                   |
 | :---: | :-------------------------------- | :-------------------------------------------------------- |
 | (a)   | `( expression )`                  | Overrides precedence rules                                |
-| (b)   | `"++" name | name "++"`           | Prefix/postfix increment of property _name_'s value       |
-|       | `"--" name | name "--"`           | Prefix/postfix decrement of property _name_'s value       |
+| (b)   | `"++" name \| name "++"`          | Prefix/postfix increment of property _name_'s value       |
+|       | `"--" name \| name "--"`          | Prefix/postfix decrement of property _name_'s value       |
 |       | `"+" expression`                  | Unary plus                                                |
 |       | `"-" expression`                  | Unary minus                                               |
 |       | `"!" expression`                  | Logical negation                                          |
@@ -438,9 +438,9 @@ following operator(s) -- listed here from highest to lowest precedence.
 |       | `expression "!=" expression`      | Not equal to                                              |
 | (g)   | `expression "&" expression`       | Bitwise _AND_                                             |
 |       | `expression "^" expression`       | Bitwise _XOR_ (exclusive _OR_)                            |
-|       | `expression "|" expression`       | Bitwise _OR_                                              |
+|       | `expression "\|" expression`      | Bitwise _OR_                                              |
 | (h)   | `expression "&&" expression`      | Logical _AND_                                             |
-| (i)   | `expression "||" expression`      | Logical _OR_                                              |
+| (i)   | `expression "\|\|" expression`    | Logical _OR_                                              |
 | (j)   | `expr. "?" expr. ":" expr.`       | Conditional operator.                                     |
 | (k)   | `name "=" expression`             | Assignment.                                               |
 | (l)   | `name op "=" expression`          | Compound assignment (`op`: `[*/%^|+-]`,  `<<`, or `>>`)   |
