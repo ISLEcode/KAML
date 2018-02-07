@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 08:29:18
+revision    : Wed Feb 07, 2018 09:19:59
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -196,14 +196,14 @@ typeset -b image=...                    # Binary data encoded as Base64
 <!-- @{ toc -->
 
 Sections
-:   [General considerations](#general-considerations) |
+:   [Overview](#overview) |
     [Identifiers](#identifiers) |
     [Properties](#properties) |
     [Scalars](#scalars) |
+    [Numbers](#numbers) |
     [Arrays](#arrays) |
     [Dictionaries](#dictionaries) |
     [Custom types](#custom-types) |
-    [Arithmetic expressions](#arithmetic-expressions) |
     [Comments](#comments) |
 
 Previous
@@ -214,7 +214,7 @@ Next
 
 <!-- @} -->
 <!-- @{ h3: general considerations -->
-### [General considerations](#specifications)
+### [Overview](#specifications)
 
 -   KAML is Korn shell syntax
     -   character encoding is either ANSI ASCII or UTF-8
@@ -245,7 +245,9 @@ kaml-stream         = { property-assignment | comment } ;
 property-assignment = [ typedef ], name, "=", value, [ comment ] ;
 ```
 
-Properties are the primary building block of a KAML documents.
+Properties are the primary building block of a KAML documents. The KAML syntax is primarily about assigning values to properties,
+identified by their name. KAML primarily supports character strings and numbers. [Custom types](#custom-types) can be defined with
+the `typedef` syntax.
 
 _Note_: No unquoted white space are allowed before or after the assignment operator (`=`).
 
@@ -269,19 +271,7 @@ exported property names such that users can continue using the naming convention
 value               = [ scalar | array | dictionary | custom ] ;
 ```
 
-```
-all-characters      = ? all UTF-8 characters ? ;
-identifier-first    = ? [[:alpha]] or "_" ? ;
-identifier-next     = ? [[:alnum:]] or "_" ? ;
-white-space         = ? UTF-8 white space characters ? ;
-```
-
-
-
-1.  The name can be preceded by a type specification (see [type specifications](#type-spectifications) below.
-
-1.  The right hand side value can be either a [scalar](#scalars), an [indexed array](#indexed-arrays), an [associative
-    array](#associative-array), a [compound variable](#compound-properties), or [custom types](#custom-types).
+These are discussed hereafter.
 
 <!-- @} -->
 <!-- @{ h3: scalars -->
@@ -319,6 +309,152 @@ backslash character (`\`) which _escapes_ their default meaning. You can quote a
     | `\\`              | Backslash                                                                     |
     | `\E`              | Escape character                                                              |
     | `\0x`             | The 8-bit character whose ASCI code is the 1-, 2-, or 3-digit octal number `x`|
+
+<!-- @} -->
+<!-- @{ h3: numbers -->
+### [Numbers](#specifications)
+
+```
+number          := integer | float | boolean ;
+integer         := whole-number | arithmetic-expression ;
+float           := real-number | arithmentic-expression ;
+boolean         := (? truthness expressed as 0 or 1 ?) ;
+```
+
+[KAML] provides extensive features to handle scalar values which represent numbers, be they integers or floating point numbers.
+
+#### [Integers](#specifications) <!-- @{ -->
+
+```{.ebnf}
+integer             = base10-integer | altbase-integer | arithmetic expression ;
+base10-integer      = [ "+" | "-" ], whole-number ;
+altbase-integer     = base "#" whole-number ;
+
+whole-number        = (? any non-negative whole number ?) ;
+base                = (? a decimal integer between 2 and 64 ?) ;
+```
+
+Integers are decimal (i.e. base 10) whole numbers. Positive numbers may be prefixed with a plus operator (`+`). Negative numbers
+are prefixed with a minus operator (`-`). KAML allows to assign an integer using an arithmetic base between 2 and 64. A number in
+a base greater than 10 uses upper-case and lower-case letters of the alphabet to represent a digit. For instance `16#b` or `16#B`
+represents the value 11 in base 16. For bases greater than 36, upper-case and lower-case letters are distinct. The characers `@`
+and `_` are the two highest digits. For example `40#b` represents 11, whereas `40#B` represents 37, both in base 40. Anything
+after a decimal point is truncated. Leading zeros are dropped.
+
+<!-- @} -->
+#### [Floating point numbers](#specifications) <!-- @{ -->
+
+```{.ebnf}
+float               = base10-integer, [ decimal-number ], [ exponent ] ;
+decimal-number      = decimal-separator, whole-number ;
+exponent            = [ "E" | "e" ], whole-number ;
+
+decimal-separator   = (? "." -- the decimal separator is comma in some locales ?) ;
+```
+
+Floats should be implemented as IEEE 754 binary64 values. A float consists of an integer part (which follows the same rules as
+integer values) optionally followed by a fractional part and/or an exponent part. If both a fractional part and exponent part are
+present, the fractional part must precede the exponent part.
+
+Some examples:
+
+```
+# fractional
+float1=+1.0 float2=3.1415 float3=-0.01
+
+# exponent
+float4=5e+22 float5=1e6 float6=-2E-2
+
+# both
+float7=6.626e-34
+```
+
+Float values `-0.0` and `+0.0` are valid and should map according to IEEE 754 (i.e. the unary minus is remembered.)
+
+_Note_: though desirable, there is currently no support for special float values such as _infinity_, _pi_ or _not a number_.
+
+<!-- @} -->
+#### [Booleans](#specifications) <!-- @{ -->
+
+KAML does not provide per se a boolean data type. Nonetheless boolean values and toggles can be easily implemented in several
+ways. We describe such implementation here in Korn shell syntax, as this is KAML's reference syntax.
+
+Below are some easy implementation examples. Many others can be imagined. The master recommendation when catering with boolean
+values, when these are to be used in arithmetic expressions, is how to you want to match truthness to digital values.
+
+1.  Boolean values expressed as _true_ or _false_ which can be used in arithmetic expressions. This is the Korn-shell notion of
+    `TRUE` which is equivalent to decimal 0, anything other is false, and evaluates to 1.
+
+    ```
+    enum bool_e=( true false )
+
+    bool_e shell_boolean=true   # Evaluates to 0
+    ```
+
+2.  Boolean value expressed as _true_ or _false_, which can be used in arithmetic expressions, and where `TRUE` is truthness as
+    expressed in the C language; that is the reverse logic compared to the previous example.
+
+    ```
+    enum cbool_e=( false true )
+
+    cbool_e clang_boolean=true  # Evaluates to 1
+    ```
+
+3.  Boolean values expressed as _true_ or _false_ in a given locale. We use here C language truthness.
+
+    ```
+    LANG=fr-FR
+    enum togge_e=( $"false" $"true" )
+
+    toggle_e toggle=faux        # Evaluates to 0
+    ```
+
+<!-- @} -->
+#### [Arithmetic expressions](#specifications) <!-- @{ -->
+
+When a scalar is explicitly typed as an integer or a float, the right hand side can be an arithmetic expression, hereafter simply
+called _expression_. An expression is a constant, a property, an environment variable, or is constructed with one of the following
+operator(s) -- listed here from highest to lowest precedence.
+
+| #.    | Operator                          | Purpose                                                                            |
+| :---: | :-------------------------------- | :--------------------------------------------------------------------------------- |
+| (a)   | `( expression )`                  | Overrides precedence rules                                                         |
+| (b)   | `"++" name | name "++"`           | Prefix/postfix increment of property _name_'s value                                |
+|       | `"--" name | name "--"`           | Prefix/postfix decrement of property _name_'s value                                |
+|       | `"+" expression`                  | Unary plus                                                                         |
+|       | `"-" expression`                  | Unary minus                                                                        |
+|       | `"!" expression`                  | Logical negation (the value is 0 for any _expression_ whose value is not 0)        |
+|       | `"~" expression`                  | Bitwise negation                                                                   |
+| (c)   | `expression "*" expression`       | Multiplication                                                                     |
+|       | `expression "/" expression`       | Division                                                                           |
+|       | `expression "%" expression`       | Remainder of 1^st^ _expression_ after dividing by the 2^nd^ _expression_           |
+| (d)   | `expression "+" expression`       | Addition                                                                           |
+|       | `expression "-" expression`       | Subtraction                                                                        |
+| (e)   | `expression "<<" expression`      | Left shift 1^st^ _expression_ by the number of bits given by the 2^nd^ expression  |
+|       | `expression ">>" expression`      | Right shift 1^st^ _expression_ by the number of bits given by the 2^nd^ expression |
+| (f)   | `expression "<=" expression`      | Less than or equal to                                                              |
+|       | `expression ">=" expression`      | Greater than or equal                                                              |
+|       | `expression "==" expression`      | Equal to                                                                           |
+|       | `expression "!=" expression`      | Not equal to                                                                       |
+| (g)   | `expression "&" expression`       | Bitwise _AND_                                                                      |
+|       | `expression "^" expression`       | Bitwise _XOR_ (exclusive _OR_)                                                     |
+|       | `expression "|" expression`       | Bitwise _OR_                                                                       |
+| (h)   | `expression "&&" expression`      | Logical _AND_ (if the 1^st^ expression is 0, then the 2^nd^ is not evaluated)      |
+| (i)   | `expression "||" expression`      | Logical _OR_ (id the 1^st^ expression is non 0, then the 2^nd^ is not evaluated)   |
+| (j)   | `expr. "?" expr. ":" expr.`       | Conditional operator.                                                              |
+| (k)   | `name "=" expression`             | Assignment.                                                                        |
+| (l)   | `name op "=" expression`          | Compound assignment (`op`: `[*/%^|+-]`,  `<<`, or `>>`)                            |
+| (m)   | `expression "," expression`       | Comman operator (both expressions are evaluated)                                   |
+
+
+Arithmetic expansion.
+
+Each `$(( ... ))` is replaced by the value of the arithmetic expresion within the double parenthesis.
+
+```
+x=$(( RANDOM%5 ))
+
+<!-- @} -->
 
 <!-- @} -->
 <!-- @{ h3: arrays --->
@@ -471,10 +607,9 @@ You can assign each property one or more predefined types or use the `typeset` t
 <!-- @{ h3: custom types -->
 ### [Custom types](#specifications)
 
-```{.ebnf}
-typeset
-
-Using the `typeset` command, you can assign one or more of the following attributes to a property.
+KAML provides extensive support for custom data type definitions. By definition, and by heritage, all KAML data types must be
+achievable in regular Korn shell scripts with the `typeset` command. This section enumerates the base options of that command
+which pertain to KAML files.
 
 Uppercase (`-u`)
 :   Change lower-case characters to upper-case when the property is expanded.
@@ -519,67 +654,6 @@ Left-justified (`-L` or `-Lwidth`)
     If you assign a value that is too big to fit `width`, the value will be truncated to match the specified width.
 
 
-#### Integer <!-- @{ -->
-
-```{.ebnf}
-integer             = base10-integer | altbase-integer | arithmetic expression ;
-base10-integer      = [ "+" | "-" ], whole-number ;
-altbase-integer     = base "#" whole-number ;
-
-whole-number        = (? any non-negative whole number ?) ;
-base                = (? a decimal integer between 2 and 64 ?) ;
-```
-
-Integers are decimal (i.e. base 10) whole numbers. Positive numbers may be prefixed with a plus operator (`+`). Negative numbers
-are prefixed with a minus operator (`-`). KAML allows to assign an integer using an arithmetic base between 2 and 64. A number in
-a base greater than 10 uses upper-case and lower-case letters of the alphabet to represent a digit. For instance `16#b` or `16#B`
-represents the value 11 in base 16. For bases greater than 36, upper-case and lower-case letters are distinct. The characers `@`
-and `_` are the two highest digits. For example `40#b` represents 11, whereas `40#B` represents 37, both in base 40. Anything
-after a decimal point is truncated. Leading zeros are dropped.
-
-<!-- @} -->
-#### Float <!-- @{ -->
-
-```{.ebnf}
-float               = base10-integer, [ decimal-number ], [ exponent ] ;
-decimal-number      = decimal-separator, whole-number ;
-exponent            = [ "E" | "e" ], whole-number ;
-
-decimal-separator   = (? "." -- the decimal separator is comma in some locales ?) ;
-```
-
-Floats should be implemented as IEEE 754 binary64 values. A float consists of an integer part (which follows the same rules as
-integer values) optionally followed by a fractional part and/or an exponent part. If both a fractional part and exponent part are
-present, the fractional part must precede the exponent part.
-
-Some examples:
-
-```
-# fractional
-float1=+1.0 float2=3.1415 float3=-0.01
-
-# exponent
-float4=5e+22 float5=1e6 float6=-2E-2
-
-# both
-float7=6.626e-34
-```
-
-Float values `-0.0` and `+0.0` are valid and should map according to IEEE 754 (i.e. the unary minus is remembered.)
-
-_Note_: though desirable, there is currently no support for special float values such as _infinity_, _pi_ or _not a number_.
-
-<!-- @} -->
-#### Boolean <!-- @{ -->
-
-Booleans are just the tokens you're used to. Always lowercase.
-
-```{.sh}
-bool1=true
-bool2=false
-```
-
-<!-- @} -->
 #### Offset Date-Time <!-- @{ -->
 
 To unambiguously represent a specific instant in time, you may use an
@@ -654,52 +728,6 @@ rounded.
 <!-- @} -->
 
 64 bit (signed long) range expected (−9,223,372,036,854,775,808 to 9,223,372,036,854,775,807).
-
-<!-- @} -->
-<!-- @{ h3: arithmetic expressions -->
-### [Arithmetic expressions](#specifications)
-
-When a scalar is explicitly typed as an integer or a float, the right hand side can be an arithmetic expression, hereafter simply
-called _expression_. An expression is a constant, a property, an environment variable, or is constructed with one of the following
-operator(s) -- listed here from highest to lowest precedence.
-
-| #.    | Operator                          | Purpose                                                                            |
-| :---: | :-------------------------------- | :--------------------------------------------------------------------------------- |
-| (a)   | `( expression )`                  | Overrides precedence rules                                                         |
-| (b)   | `"++" name | name "++"`           | Prefix/postfix increment of property _name_'s value                                |
-|       | `"--" name | name "--"`           | Prefix/postfix decrement of property _name_'s value                                |
-|       | `"+" expression`                  | Unary plus                                                                         |
-|       | `"-" expression`                  | Unary minus                                                                        |
-|       | `"!" expression`                  | Logical negation (the value is 0 for any _expression_ whose value is not 0)        |
-|       | `"~" expression`                  | Bitwise negation                                                                   |
-| (c)   | `expression "*" expression`       | Multiplicatio                                                                      |
-|       | `expression "/" expression`       | Division                                                                           |
-|       | `expression "%" expression`       | Remainder of 1^st^ _expression_ after dividing by the 2^nd^ _expression_           |
-| (d)   | `expression "+" expression`       | Addition                                                                           |
-|       | `expression "-" expression`       | Subtraction                                                                        |
-| (e)   | `expression "<<" expression`      | Left shift 1^st^ _expression_ by the number of bits given by the 2^nd^ expression  |
-|       | `expression ">>" expression`      | Right shift 1^st^ _expression_ by the number of bits given by the 2^nd^ expression |
-| (f)   | `expression "<=" expression`      | Less than or equal to                                                              |
-|       | `expression ">=" expression`      | Greater than or equal                                                              |
-|       | `expression "==" expression`      | Equal to                                                                           |
-|       | `expression "!=" expression`      | Not equal to                                                                       |
-| (g)   | `expression "&" expression`       | Bitwise _AND_                                                                      |
-|       | `expression "^" expression`       | Bitwise _XOR_ (exclusive _OR_)                                                     |
-|       | `expression "|" expression`       | Bitwise _OR_                                                                       |
-| (h)   | `expression "&&" expression`      | Logical _AND_ (if the 1^st^ expression is 0, then the 2^nd^ is not evaluated)      |
-| (i)   | `expression "||" expression`      | Logical _OR_ (id the 1^st^ expression is non 0, then the 2^nd^ is not evaluated)   |
-| (j)   | `expr. "?" expr. ":" expr.`       | Conditional operator.                                                              |
-| (k)   | `name "=" expression`             | Assignment.                                                                        |
-| (l)   | `name op "=" expression`          | Compound assignment (`op`: `[*/%^|+-]`,  `<<`, or `>>`)                            |
-| (m)   | `expression "," expression`       | Comman operator (both expressions are evaluated)                                   |
-
-
-Arithmetic expansion.
-
-Each `$(( ... ))` is replaced by the value of the arithmetic expresion within the double parenthesis.
-
-```
-x=$(( RANDOM%5 ))
 
 <!-- @} -->
 <!-- @{ h3: comments -->
