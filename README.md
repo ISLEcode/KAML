@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 10:24:36
+revision    : Wed Feb 07, 2018 10:26:58
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -204,7 +204,7 @@ Sections
     [Arrays](#arrays) |
     [Dictionaries](#dictionaries) |
     [Custom types](#custom-types) |
-    [Comments](#comments) |
+    [Comments](#comments)
 
 Previous
 :   [Top](#kaml-aint-markup-language)
@@ -213,7 +213,7 @@ Next
 :   [About](#about)
 
 <!-- @} -->
-<!-- @{ h3: general considerations -->
+<!-- @{ h3: overview -->
 ### [Overview](#specifications)
 
 -   KAML is Korn shell syntax
@@ -322,7 +322,6 @@ boolean         := (? truthness expressed as 0 or 1 ?) ;
 ```
 
 [KAML] provides extensive features to handle scalar values which represent numbers, be they integers or floating point numbers.
-
 #### [Integers](#numbers) <!-- @{ -->
 
 ```{.ebnf}
@@ -516,6 +515,11 @@ arithmetic expression within the double parenthesis.
 integer     a=$(( RANDOM % 5 ))
 integer     b=$(( a * 10 + 256 ))
 ```
+<!-- @} -->
+#### [Arithmetic functions](#numbers) <!-- @{ -->
+
+TODO
+
 <!-- @} -->
 
 <!-- @} -->
