@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 10:07:06
+revision    : Wed Feb 07, 2018 10:09:06
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -685,32 +685,36 @@ Change upper-case characters to lower-case when the property is expanded.
 Evaluate the property's value as an arithmetic floating point expression. Output should match the `%g` format of the C language
 _printf(3)_ function. The `n` in `En` is the number of significant digits; the default is 10.
 
-    You can use the predefined `float` alias to declear floating point variables.
+You can use the predefined `float` alias to declear floating point variables.
 
-Floating point, fixed precision (`-F` or `-Fn`)
-:   Evaluate the property's value as an arithmetic floating point expression. Output should match the `%f` format of the
-    C language _printf(3)_ function. The `n` in `En` is the number of significant digits; the default is 10.
+###### Floating point, fixed precision (`-F` or `-Fn`)
 
-Integer (`-i` or `-ibase`)
-:   Evaluate the property's value as an arithmetic integer expression. The `base` is the integer's arithmetic base, and can be
-    a decimal integer between 2 and 64.
+Evaluate the property's value as an arithmetic floating point expression. Output should match the `%f` format of the C language
+_printf(3)_ function. The `n` in `En` is the number of significant digits; the default is 10.
 
-    You can use the predefined `integer` to declare integer variables.
+###### Integer (`-i` or `-ibase`)
 
-    ```
-    integer x=6
-    typeset -i8 y=x+x # := 8#14
-    ```
+Evaluate the property's value as an arithmetic integer expression. The `base` is the integer's arithmetic base, and can be
+a decimal integer between 2 and 64.
 
-Associative array (`-A`)
-:   Define an associative array, as opposed to an indexed array. The subscript for an associative array element is an arbitrary
-    string.
+You can use the predefined `integer` to declare integer variables.
 
-Left-justified (`-L` or `-Lwidth`)
-:   Left justify the character's of the property's value to fit `width` and put trailing spaces, tf needed. The `width` is
-    any positive number. If unspecified, use the number of characters of the first value assigned to the property.
+```
+integer x=6
+typeset -i8 y=x+x # := 8#14
+```
 
-    If you assign a value that is too big to fit `width`, the value will be truncated to match the specified width.
+###### Associative array (`-A`)
+
+Define an associative array, as opposed to an indexed array. The subscript for an associative array element is an arbitrary
+string.
+
+###### Left-justified (`-L` or `-Lwidth`)
+
+Left justify the character's of the property's value to fit `width` and put trailing spaces, tf needed. The `width` is any
+positive number. If unspecified, use the number of characters of the first value assigned to the property.
+
+If you assign a value that is too big to fit `width`, the value will be truncated to match the specified width.
 
 
 <!-- @} -->
