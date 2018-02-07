@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 14:17:17
+revision    : Wed Feb 07, 2018 14:34:22
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -8,14 +8,18 @@ author      : Jean-Michel Marcastel
 ## KAML ain't markup language
 <!-- @{ toc -->
 
-Sections
+<small>
+
+Sub-sections
 :   [Overview](#overview) |
     [Version](#version) |
     [Examples](#examples)
 
-Next
+Next sections
 :   [Specifications](#specifications) |
     [About](#about)
+
+</small>
 
 <!-- @} -->
 <!-- @{ h3: overview -->
@@ -195,7 +199,9 @@ typeset -b image=...                    # Binary data encoded as Base64
 ## Specifications
 <!-- @{ toc -->
 
-Sections
+<small>
+
+Sub-sections
 :   [Overview](#overview) |
     [Identifiers](#identifiers) |
     [Properties](#properties) |
@@ -206,11 +212,13 @@ Sections
     [Custom types](#custom-types) |
     [Comments](#comments)
 
-Previous
+Previous section
 :   [Top](#kaml-aint-markup-language)
 
-Next
+Next section
 :   [About](#about)
+
+</small>
 
 <!-- @} -->
 <!-- @{ h3: overview -->
@@ -877,12 +885,16 @@ merged with other data.
 ## About
 <!-- @{ toc -->
 
-Sections
+<small>
+
+Sub-sections
 :   [Comparison with other formats](#comparison-with-other-formats) |
     [Get involved](#get-involved)
 
-Previous
+Previous sections
 :   [Specifications](#specifications), [Top](#kaml-aint-markup-language)
+
+</small>
 
 <!-- @} -->
 <!-- @{ comparison with other formats -->
