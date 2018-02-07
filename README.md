@@ -1,5 +1,5 @@
 ---
-revision    : Tue Feb 06, 2018 18:07:25
+revision    : Wed Feb 07, 2018 06:18:17
 author      : Jean-Michel Marcastel
 title       : KAML ain't markup language
 ---
@@ -591,6 +591,9 @@ You can assign each property one or more predefined types or use the `typeset` t
 <!-- @{ h3: custom types -->
 ### [Custom types](#specifications)
 
+```{.ebnf}
+typeset
+
 Using the `typeset` command, you can assign one or more of the following attributes to a property.
 
 Uppercase (`-u`)
@@ -823,19 +826,73 @@ x=$(( RANDOM%5 ))
 ### [Comments](#specifications)
 
 ```{.ebnf}
-comment                 = plain-comment | she-bang | embedded-documentation
-plain-comment           = [ { white-space } ], "#" any-character-except-newline, newline
-she-bang                = "#!" non-white-space any-character-except-newline, newline
-                          (* a she-bang can only appear on the first line of the file *)
-embedded-documentation  = [ { white-space } ], "#!" white-space any-character-except-newline, newline
+comment                 = plain-comment | special-comment ;
+plain-comment           = "#",  comment-string, newline ;
+special-comment         = "#!", comment-string, newline ;
+comment-string          = (? any character except newline ?)
 ```
 
-A hash symbol marks the rest of the line as a comment.
+KAML streams can include comments. Comments are not preserved. A comment is introduced by the hash symbol (`#`) which marks the
+rest of a line as a comment. If the hash symbol is immediately followed by an exclamation mark (`!`), the comment targets
+literate programming and embedded documentation.
 
 ```
 # This is a full-line comment
 name="value" # This is a comment at the end of a line
 ```
+
+Plain comments are dropped upon processing a KAML stream. Special comments can be extracted separately to dynamically build the
+_man(1)_ page or documentation for the KAML stream. Embedded documentation is written in [Markdown] and can contain [Doxygen] like
+commands to structure the documentation content.
+
+```
+#! @param colour
+#! @brief a list of colours for demonstration purposes
+#! The _colour_ property is an **associative array**.
+
+colour=([apple]=red [grape]=purple [banana]=yellow)
+```
+
+_Recommendation_: There are many [Markdown] flavours, despite the recent [CommonMark] initiative to provide some standardisation.
+We recommend standardising on [Pandoc] flavoured Markdown syntax which is rich and extensible. [Pandoc] exposes the abstract
+syntax tree of the parsed content allowing easy handling of embedded custom [Doxygen]-like commands.
+
+When the first 16 bits of a [KAML] stream (i.e. the UNIX _magic_ number) are the special comment prefix (`#!`), the comment is
+handled differently. The comment can either be a version string or a [shebang]. If the magic number is immediately followed by the
+upper-case token `KAML`, then the comment describes the version of the subsequent [KAML] stream.
+
+```
+#! KAML1.0
+```
+
+Otherwise the special comment is assumed to be a UNIX [shebang]. A minimal example might be:
+
+```
+#!/bin/cat
+output="Hello world"
+```
+
+By supporting shebangs, [KAML] allows _inside out_ integration rather than the traditional _outside in_ model. Akin to _object
+orientation_ in programming, this model allows to create a context aware middleman that interacts between multiple programs,
+pre-processing the [KAML] data such that each participating program collects the needed information in the format supported by
+that program, this could be [JSON], [YAML], [XML] or other standard or proprietary formats.
+
+```
+#! /usr/bin/awk '/^#!/,/^---/'
+```
+
+A common use case is the practice to embed metadata and character data in a same file. Consider the `<HEAD>` section of HTML
+documents or the [YAML] header that is commonly embedded in Markdown documents. The Markdown document potentially being the
+source document from which the HTML document is produced. Both documents will then share common metadata which will be used by
+various programs to enact the life cycles of these documents.
+
+```
+#! /usr/df/bin/blog-manager
+```
+
+By using inside out integration, the middle manager becomes the _single point of contact_ to access and transform the [KAML] data.
+No central store, or configuration database, is required, and data can be translated into multiple formats, combined, split, or
+merged with other data.
 
 <!-- @} -->
 ## About
@@ -889,12 +946,16 @@ Documentation, bug reports, pull requests, and all other contributions are welco
 <!-- @{ bookmarks -->
 
 [ASN-1]:        https://en.wikipedia.org/wiki/Abstract_Syntax_Notation_One
+[Doxygen]:      https://en.wikipedia.org/wiki/Doxygen
 [EBNF]:         https://en.wikipedia.org/wiki/Extended_Backus–Naur_form
 [INI]:          https://en.wikipedia.org/wiki/INI_file
 [JSON]:         https://en.wikipedia.org/wiki/JSON
 [KAML]:         https://github.com/ISLEcode/KAML
+[Markdown]:     https://en.wikipedia.org/wiki/Markdown
+[CommonMark]:   https://en.wikipedia.org/wiki/Markdown#CommonMark
 [Open Group]:   http://www.opengroup.org
-[POSIX]:        https://fr.wikipedia.org/wiki/POSIX
+[POSIX]:        https://en.wikipedia.org/wiki/POSIX
+[Pandoc]:       https://en.wikipedia.org/wiki/Pandoc
 [SGML]:         https://en.wikipedia.org/wiki/Standard_Generalized_Markup_Language
 [SheBang]:      https://en.wikipedia.org/wiki/Shebang_(Unix)
 [TOML]:         https://en.wikipedia.org/wiki/TOML
