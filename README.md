@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 10:26:58
+revision    : Wed Feb 07, 2018 14:16:14
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -518,7 +518,27 @@ integer     b=$(( a * 10 + 256 ))
 <!-- @} -->
 #### [Arithmetic functions](#numbers) <!-- @{ -->
 
-TODO
+```{.ebnf}
+arithmetic-function     = "function(", expression, ")" ;
+```
+
+Arithmetic expressions can use arithmetic functions. The following functions are available:
+
+| :------------ | :-------------------------------------------------------------|
+| `abs`         | Absolute value                                                |
+| `acos`        | Arc cosine of angle in radians                                |
+| `asin`        | Arc sine                                                      |
+| `atan`        | Arc tangent                                                   |
+| `cos`         | Cosine                                                        |
+| `cosh`        | Hyperbolic cosine                                             |
+| `exp`         | Exponential with base `e` where `e ~ 2.178`                   |
+| `int`         | Greatest integer less than or equal to value of `expression`  |
+| `log`         | Logarithm                                                     |
+| `sin`         | Sine                                                          |
+| `sinh`        | Hyperbolic sine                                               |
+| `sqrt`        | Square root                                                   |
+| `tan`         | Tangent                                                       |
+| `tanh`        | Hyperbolic tangent                                            |
 
 <!-- @} -->
 
@@ -675,6 +695,7 @@ declare through command line interface options. We use the same syntax in [KAML]
 associated alias name (e.g. `integer` or `float`).
 
 ###### Uppercase (`-u`)
+
 Change lower-case characters to upper-case when the property is expanded.
 
 ```
@@ -682,6 +703,7 @@ typeset -u x=abc    # := ABC
 ```
 
 ###### Lowercase (`-l`)
+
 Change upper-case characters to lower-case when the property is expanded.
 
 ###### Floating point, scientific notation (`-E` or `-En`)
@@ -751,27 +773,17 @@ typeset -Z3 x=abcd          # Expands to 'bcd'
 typeset -Z3 y=3             # Expands to '003'
 ```
 
-###### Read-only
+###### Read-only (`-r`)
 
-TODO
+When a property has the read-only attribute set, any attempt to change the property's value in subsequent processing should raise
+a (fatal) exception. Once set, the read-only attribute cannot be unset.
 
-###### Name reference
+You can set use the `readonly` or `typeset -r` to set this attribute.
 
-TODO
-
-
-###### Exported
-
-TODO
-
-###### Host operating system pathname mapping
-
-TODO
-
-###### Tagged
-
-TODO
-
+```
+readonly foo=bar
+foo=nobar                   # Raises exception 'foo: is read only'
+```
 
 <!-- @} -->
 #### Enumerations <!-- @{ -->
