@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 09:38:36
+revision    : Wed Feb 07, 2018 10:07:06
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -323,7 +323,7 @@ boolean         := (? truthness expressed as 0 or 1 ?) ;
 
 [KAML] provides extensive features to handle scalar values which represent numbers, be they integers or floating point numbers.
 
-#### [Integers](#specifications) <!-- @{ -->
+#### [Integers](#numbers) <!-- @{ -->
 
 ```{.ebnf}
 integer             = base10-integer | altbase-integer | arithmetic expression ;
@@ -342,7 +342,7 @@ and `_` are the two highest digits. For example `40#b` represents 11, whereas `4
 after a decimal point is truncated. Leading zeros are dropped.
 
 <!-- @} -->
-#### [Floating point numbers](#specifications) <!-- @{ -->
+#### [Floating point numbers](#numbers) <!-- @{ -->
 
 ```{.ebnf}
 float               = base10-integer, [ decimal-number ], [ exponent ] ;
@@ -374,7 +374,7 @@ Float values `-0.0` and `+0.0` are valid and should map according to IEEE 754 (i
 _Note_: though desirable, there is currently no support for special float values such as _infinity_, _pi_ or _not a number_.
 
 <!-- @} -->
-#### [Booleans](#specifications) <!-- @{ -->
+#### [Booleans](#numbers) <!-- @{ -->
 
 KAML does not provide per se a boolean data type. Nonetheless boolean values and toggles can be easily implemented in several
 ways. We describe such implementation here in Korn shell syntax, as this is KAML's reference syntax.
@@ -416,7 +416,58 @@ values, when these are to be used in arithmetic expressions, is how to you want 
     ```
 
 <!-- @} -->
-#### [Arithmetic expressions](#specifications) <!-- @{ -->
+#### [Epoch time](#numbers) <!-- @{ -->
+
+<span style="color:red">
+
+**This section is work-in-progress. It was ripped from [TOML] with the intent to adapt it for [KAML] using the UNIX _Epoch_
+reference point in time.**
+
+</span>
+
+To unambiguously represent a specific instant in time, you may use an [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time with offset.
+
+```{.sh}
+odt1=1979-05-27T07:32:00Z
+odt2=1979-05-27T00:32:00-07:00
+odt3=1979-05-27T00:32:00.999999-07:00
+```
+
+The precision of fractional seconds is implementation specific, but at least millisecond precision is expected. If the value
+contains greater precision than the implementation can support, the additional precision must be truncated, not rounded.
+
+If you omit the offset from an [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time, it will represent the given
+date-time without any relation to an offset or timezone. It cannot be converted to an instant in time without additional
+information. Conversion to an instant, if required, is implementation specific.
+
+```{.sh}
+ldt1=1979-05-27T07:32:00
+ldt2=1979-05-27T00:32:00.999999
+```
+
+The precision of fractional seconds is implementation specific, but at least millisecond precision is expected. If the value
+contains greater precision than the implementation can support, the additional precision must be truncated, not rounded.
+
+If you include only the date portion of an [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time, it will represent
+that entire day without any relation to an offset or timezone.
+
+```{.sh}
+ld1=1979-05-27
+```
+
+If you include only the time portion of an [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time, it will represent
+that time of day without any relation to a specific day or any offset or timezone.
+
+```{.sh}
+lt1=07:32:00
+lt2=00:32:00.999999
+```
+
+The precision of fractional seconds is implementation specific, but at least millisecond precision is expected. If the value
+contains greater precision than the implementation can support, the additional precision must be truncated, not rounded.
+
+<!-- @} -->
+#### [Arithmetic expressions](#numbers) <!-- @{ -->
 
 When a scalar is explicitly typed as an integer or a float, the right hand side value can be an arithmetic expression, hereafter
 simply called _expression_. An expression is a constant, a property, an environment variable, or is constructed with one of the
@@ -610,24 +661,29 @@ In JSON land, that would give you the following structure.
 <!-- @{ h3: custom types -->
 ### [Custom types](#specifications)
 
-KAML provides extensive support for custom data type definitions. By definition, and by heritage, all KAML data types must be
-achievable in regular Korn shell scripts with the `typeset` command. This section enumerates the base options of that command
-which pertain to KAML files.
+[KAML] allows for the definition of custom data types. Since the official linter for [KAML] is the Korn shell, we represent the
+definition of custom data types in this section based on Korn shell capabilities, in particular the `typeset` and `enum` commands.
 
-Uppercase (`-u`)
-:   Change lower-case characters to upper-case when the property is expanded.
+#### Data types <!-- @{ -->
 
-    ```
-    typeset -u x=abc    # := ABC
-    ```
+The `typeset` command is the primary Korn shell interface to define custom data types. Being a UNIX shell command, data type are
+declare through command line interface options. We use the same syntax in [KAML] files. Commonly used data types have an
+associated alias name (e.g. `integer` or `float`).
 
-Lowercase (`-l`)
-:   Change upper-case characters to lower-case when the property is expanded.
+###### Uppercase (`-u`)
+Change lower-case characters to upper-case when the property is expanded.
 
+```
+typeset -u x=abc    # := ABC
+```
 
-Floating point, scientific notation (`-E` or `-En`)
-:   Evaluate the property's value as an arithmetic floating point expression. Output should match the `%g` format of the
-    C language _printf(3)_ function. The `n` in `En` is the number of significant digits; the default is 10.
+###### Lowercase (`-l`)
+Change upper-case characters to lower-case when the property is expanded.
+
+###### Floating point, scientific notation (`-E` or `-En`)
+
+Evaluate the property's value as an arithmetic floating point expression. Output should match the `%g` format of the C language
+_printf(3)_ function. The `n` in `En` is the number of significant digits; the default is 10.
 
     You can use the predefined `float` alias to declear floating point variables.
 
@@ -657,54 +713,19 @@ Left-justified (`-L` or `-Lwidth`)
     If you assign a value that is too big to fit `width`, the value will be truncated to match the specified width.
 
 
-#### Date-Time <!-- @{ -->
+<!-- @} -->
+#### Enumerations <!-- @{ -->
 
-<span style="color:red">This section has been ripped from [TOML] with the intent to adapt it in [KAML]</span>
+The Korn shell `enum` command allows to create enumeration types that can be used in [KAML] streams.
 
-To unambiguously represent a specific instant in time, you may use an [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time with offset.
-
-```{.sh}
-odt1=1979-05-27T07:32:00Z
-odt2=1979-05-27T00:32:00-07:00
-odt3=1979-05-27T00:32:00.999999-07:00
+```
+enum [ options ] typename=( value ... )
 ```
 
-The precision of fractional seconds is implementation specific, but at least millisecond precision is expected. If the value
-contains greater precision than the implementation can support, the additional precision must be truncated, not rounded.
-
-If you omit the offset from an [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time, it will represent the given
-date-time without any relation to an offset or timezone. It cannot be converted to an instant in time without additional
-information. Conversion to an instant, if required, is implementation specific.
-
-```{.sh}
-ldt1=1979-05-27T07:32:00
-ldt2=1979-05-27T00:32:00.999999
-```
-
-The precision of fractional seconds is implementation specific, but at least millisecond precision is expected. If the value
-contains greater precision than the implementation can support, the additional precision must be truncated, not rounded.
-
-If you include only the date portion of an [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time, it will represent
-that entire day without any relation to an offset or timezone.
-
-```{.sh}
-ld1=1979-05-27
-```
-
-If you include only the time portion of an [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time, it will represent
-that time of day without any relation to a specific day or any offset or timezone.
-
-```{.sh}
-lt1=07:32:00
-lt2=00:32:00.999999
-```
-
-The precision of fractional seconds is implementation specific, but at least millisecond precision is expected. If the value
-contains greater precision than the implementation can support, the additional precision must be truncated, not rounded.
+`enum` is a declaration command that creates an enumeration type *typename* that can only store any one of the values in the
+indexed array variable *typename*. See the discussion on [booleans](#booleans) for examples.
 
 <!-- @} -->
-
-64 bit (signed long) range expected (−9,223,372,036,854,775,808 to 9,223,372,036,854,775,807).
 
 <!-- @} -->
 <!-- @{ h3: comments -->
