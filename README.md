@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 10:09:06
+revision    : Wed Feb 07, 2018 10:24:36
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -715,6 +715,58 @@ Left justify the character's of the property's value to fit `width` and put trai
 positive number. If unspecified, use the number of characters of the first value assigned to the property.
 
 If you assign a value that is too big to fit `width`, the value will be truncated to match the specified width.
+
+###### Strip leading zeros (`-LZ` or `-LZwidth`)
+
+This is similar to the left justification attribute (above), except that upon expansion leading zeros at the left are stripped.
+
+```
+typeset -LZ3 x=abcd         # Expands to 'abc'
+typeset -LZ3 y=03           # Expands to '3  '
+typeset -LZ3 z=00abcd       # Expands to 'abc'
+```
+
+###### Right justified (`-R` or `-Rwidth`)
+
+Right justify the characters to fit `width`, putting leading spaces at the left, if needed, to fill `width`. The `width` is any
+positive number. If unspecified, use the number of characters of the first value assigned to the property.
+
+If you assign a value that is too big to fit `width`, the value will be truncated to match the specified width.
+
+```
+typeset -R3 x=abcd          # Expands to 'bcd'
+typeset -R3 y=3             # Expands to '  3'
+```
+
+###### Zero-filled (`-RZ` or `-RZwidth`, alternatively `-Z` or `-Zwidth`)
+
+This is similar to the right justification attribute (above). However up expansion leading zeros are prepended at the left.
+
+```
+typeset -Z3 x=abcd          # Expands to 'bcd'
+typeset -Z3 y=3             # Expands to '003'
+```
+
+###### Read-only
+
+TODO
+
+###### Name reference
+
+TODO
+
+
+###### Exported
+
+TODO
+
+###### Host operating system pathname mapping
+
+TODO
+
+###### Tagged
+
+TODO
 
 
 <!-- @} -->
