@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 09:19:59
+revision    : Wed Feb 07, 2018 09:27:40
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -412,48 +412,53 @@ values, when these are to be used in arithmetic expressions, is how to you want 
 <!-- @} -->
 #### [Arithmetic expressions](#specifications) <!-- @{ -->
 
-When a scalar is explicitly typed as an integer or a float, the right hand side can be an arithmetic expression, hereafter simply
-called _expression_. An expression is a constant, a property, an environment variable, or is constructed with one of the following
-operator(s) -- listed here from highest to lowest precedence.
+When a scalar is explicitly typed as an integer or a float, the right hand side value can be an arithmetic expression, hereafter
+simply called _expression_. An expression is a constant, a property, an environment variable, or is constructed with one of the
+following operator(s) -- listed here from highest to lowest precedence.
 
-| #.    | Operator                          | Purpose                                                                            |
-| :---: | :-------------------------------- | :--------------------------------------------------------------------------------- |
-| (a)   | `( expression )`                  | Overrides precedence rules                                                         |
-| (b)   | `"++" name | name "++"`           | Prefix/postfix increment of property _name_'s value                                |
-|       | `"--" name | name "--"`           | Prefix/postfix decrement of property _name_'s value                                |
-|       | `"+" expression`                  | Unary plus                                                                         |
-|       | `"-" expression`                  | Unary minus                                                                        |
-|       | `"!" expression`                  | Logical negation (the value is 0 for any _expression_ whose value is not 0)        |
-|       | `"~" expression`                  | Bitwise negation                                                                   |
-| (c)   | `expression "*" expression`       | Multiplication                                                                     |
-|       | `expression "/" expression`       | Division                                                                           |
-|       | `expression "%" expression`       | Remainder of 1^st^ _expression_ after dividing by the 2^nd^ _expression_           |
-| (d)   | `expression "+" expression`       | Addition                                                                           |
-|       | `expression "-" expression`       | Subtraction                                                                        |
-| (e)   | `expression "<<" expression`      | Left shift 1^st^ _expression_ by the number of bits given by the 2^nd^ expression  |
-|       | `expression ">>" expression`      | Right shift 1^st^ _expression_ by the number of bits given by the 2^nd^ expression |
-| (f)   | `expression "<=" expression`      | Less than or equal to                                                              |
-|       | `expression ">=" expression`      | Greater than or equal                                                              |
-|       | `expression "==" expression`      | Equal to                                                                           |
-|       | `expression "!=" expression`      | Not equal to                                                                       |
-| (g)   | `expression "&" expression`       | Bitwise _AND_                                                                      |
-|       | `expression "^" expression`       | Bitwise _XOR_ (exclusive _OR_)                                                     |
-|       | `expression "|" expression`       | Bitwise _OR_                                                                       |
-| (h)   | `expression "&&" expression`      | Logical _AND_ (if the 1^st^ expression is 0, then the 2^nd^ is not evaluated)      |
-| (i)   | `expression "||" expression`      | Logical _OR_ (id the 1^st^ expression is non 0, then the 2^nd^ is not evaluated)   |
-| (j)   | `expr. "?" expr. ":" expr.`       | Conditional operator.                                                              |
-| (k)   | `name "=" expression`             | Assignment.                                                                        |
-| (l)   | `name op "=" expression`          | Compound assignment (`op`: `[*/%^|+-]`,  `<<`, or `>>`)                            |
-| (m)   | `expression "," expression`       | Comman operator (both expressions are evaluated)                                   |
+| #.    | Operator                          | Purpose                                                   |
+| :---: | :-------------------------------- | :-------------------------------------------------------- |
+| (a)   | `( expression )`                  | Overrides precedence rules                                |
+| (b)   | `"++" name | name "++"`           | Prefix/postfix increment of property _name_'s value       |
+|       | `"--" name | name "--"`           | Prefix/postfix decrement of property _name_'s value       |
+|       | `"+" expression`                  | Unary plus                                                |
+|       | `"-" expression`                  | Unary minus                                               |
+|       | `"!" expression`                  | Logical negation                                          |
+|       | `"~" expression`                  | Bitwise negation                                          |
+| (c)   | `expression "*" expression`       | Multiplication                                            |
+|       | `expression "/" expression`       | Division                                                  |
+|       | `expression "%" expression`       | Modulo                                                    |
+| (d)   | `expression "+" expression`       | Addition                                                  |
+|       | `expression "-" expression`       | Subtraction                                               |
+| (e)   | `expression "<<" expression`      | Left shift                                                |
+|       | `expression ">>" expression`      | Right shift                                               |
+| (f)   | `expression "<=" expression`      | Less than or equal to                                     |
+|       | `expression ">=" expression`      | Greater than or equal                                     |
+|       | `expression "==" expression`      | Equal to                                                  |
+|       | `expression "!=" expression`      | Not equal to                                              |
+| (g)   | `expression "&" expression`       | Bitwise _AND_                                             |
+|       | `expression "^" expression`       | Bitwise _XOR_ (exclusive _OR_)                            |
+|       | `expression "|" expression`       | Bitwise _OR_                                              |
+| (h)   | `expression "&&" expression`      | Logical _AND_                                             |
+| (i)   | `expression "||" expression`      | Logical _OR_                                              |
+| (j)   | `expr. "?" expr. ":" expr.`       | Conditional operator.                                     |
+| (k)   | `name "=" expression`             | Assignment.                                               |
+| (l)   | `name op "=" expression`          | Compound assignment (`op`: `[*/%^|+-]`,  `<<`, or `>>`)   |
+| (m)   | `expression "," expression`       | Comman operator (both expressions are evaluated)          |
 
-
-Arithmetic expansion.
-
-Each `$(( ... ))` is replaced by the value of the arithmetic expresion within the double parenthesis.
+Simple expressions can be type as-is -- but without spaces:
 
 ```
-x=$(( RANDOM%5 ))
+integer sum=10+11+12
+```
 
+More complex expressions should use arithmetic expansion (`$(( ... ))`). Each `$(( ... ))` is replaced by the value of the
+arithmetic expression within the double parenthesis.
+
+```
+integer     a=$(( RANDOM % 5 ))
+integer     b=$(( a * 10 + 256 ))
+```
 <!-- @} -->
 
 <!-- @} -->
