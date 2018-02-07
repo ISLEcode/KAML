@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 07:40:16
+revision    : Wed Feb 07, 2018 07:43:01
 subject     : KAML licensing
 ---
 
@@ -25,6 +25,7 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRA
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 <a name="cc-by-sa-4.0>"></a>
+
 ## Creative Commons Attribution-ShareAlike 4.0 International
 
 Creative Commons Corporation ("Creative Commons") is not a law firm and does not provide legal services or legal advice.
@@ -123,56 +124,56 @@ m.  You means the individual or entity exercising the Licensed Rights under this
 
 #### Section 2 -- Scope.
 
-A.  License grant.
+##### A. License grant.
 
-    1.  Subject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free,
-        non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:
+1.  Subject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free,
+    non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:
 
-        a.  reproduce and Share the Licensed Material, in whole or in part; and
+    a.  reproduce and Share the Licensed Material, in whole or in part; and
 
-        b.  produce, reproduce, and Share Adapted Material.
+    b.  produce, reproduce, and Share Adapted Material.
 
-    2.  Exceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public
-        License does not apply, and You do not need to comply with its terms and conditions.
+2.  Exceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public
+    License does not apply, and You do not need to comply with its terms and conditions.
 
-    3.  Term. The term of this Public License is specified in Section 6(a).
+3.  Term. The term of this Public License is specified in Section 6(a).
 
-    4.  Media and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all
-        media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The
-        Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications
-        necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective
-        Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section
-        2(a)(4) never produces Adapted Material.
+4.  Media and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all
+    media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The
+    Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications
+    necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective
+    Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section
+    2(a)(4) never produces Adapted Material.
 
-    5.  Downstream recipients.
+5.  Downstream recipients.
 
-        a.  Offer from the Licensor -- Licensed Material. Every recipient of the Licensed Material automatically receives an offer
-            from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.
+    a.  Offer from the Licensor -- Licensed Material. Every recipient of the Licensed Material automatically receives an offer
+        from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.
 
-        b.  Additional offer from the Licensor -- Adapted Material. Every recipient of Adapted Material from You automatically
-            receives an offer from the Licensor to exercise the Licensed Rights in the Adapted Material under the conditions of
-            the Adapter's License You apply.
+    b.  Additional offer from the Licensor -- Adapted Material. Every recipient of Adapted Material from You automatically
+        receives an offer from the Licensor to exercise the Licensed Rights in the Adapted Material under the conditions of
+        the Adapter's License You apply.
 
-        c.  No downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply
-            any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights
-            by any recipient of the Licensed Material.
+    c.  No downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply
+        any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights
+        by any recipient of the Licensed Material.
 
-    6.  No endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You
-        are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by,
-        the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).
+6.  No endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You
+    are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by,
+    the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).
 
-B.  Other rights.
+##### B. Other rights.
 
-    1.  Moral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy,
-        and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert
-        any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not
-        otherwise.
+1.  Moral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy,
+    and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert
+    any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not
+    otherwise.
 
-    2.  Patent and trademark rights are not licensed under this Public License.
+2.  Patent and trademark rights are not licensed under this Public License.
 
-    3.  To the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed
-        Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing
-        scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.
+3.  To the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed
+    Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing
+    scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.
 
 
 #### Section 3 -- License Conditions.
