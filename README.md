@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 09:29:46
+revision    : Wed Feb 07, 2018 09:34:10
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -387,7 +387,9 @@ values, when these are to be used in arithmetic expressions, is how to you want 
 
     ```
     enum bool_e=( true false )
-
+    ```
+    We can then use the following in [KAML] streams:
+    ```
     bool_e shell_boolean=true   # Evaluates to 0
     ```
 
@@ -396,7 +398,9 @@ values, when these are to be used in arithmetic expressions, is how to you want 
 
     ```
     enum cbool_e=( false true )
-
+    ```
+    We can then use the following in [KAML] streams:
+    ```
     cbool_e clang_boolean=true  # Evaluates to 1
     ```
 
@@ -405,7 +409,9 @@ values, when these are to be used in arithmetic expressions, is how to you want 
     ```
     LANG=fr-FR
     enum togge_e=( $"false" $"true" )
-
+    ```
+    We can then use the following in [KAML] streams:
+    ```
     toggle_e toggle=faux        # Evaluates to 0
     ```
 
