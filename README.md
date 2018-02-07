@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 16:28:42
+revision    : Wed Feb 07, 2018 16:32:07
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -429,20 +429,25 @@ Nonetheless manipulation of times and dates is a necessity. [KAML] addresses thi
 1.  A point in time reference for arithmetic calculations: the UNIX [Epoch] \(1970-01-01T00:00:00).
 
     ```
-    1518013975
+    1518013975  # The unix time at which this example was written
     ```
 
 1.  A standard for the string representation of dates and times: [RFC 3339] (which is a profile of [ISO 8601]).
 
     ```
-    2018-02-07T15:32:55
+    2018-02-07T15:32:55 # The previous example represented in a human readable format
     ```
 
 1.  A means of converting scalar representations to numeric values, and vis-versa.
 
     ```
+    # A time represented as a number
     integer number=1518013975
+
+    # Conversion of the number into a scalar
     scalar=$(date -j -r ${this.number} +%Y-%m-%dT%H:%M:%S)
+
+    # Conversion of the scalar back to the original number
     integer number_again=$(date -j -f %Y-%m-%dT%H:%M:%S ${this.scalar} +%s)
     ```
 
