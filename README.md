@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 14:16:14
+revision    : Wed Feb 07, 2018 14:17:17
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -524,6 +524,7 @@ arithmetic-function     = "function(", expression, ")" ;
 
 Arithmetic expressions can use arithmetic functions. The following functions are available:
 
+| Name          | Implements                                                    |
 | :------------ | :-------------------------------------------------------------|
 | `abs`         | Absolute value                                                |
 | `acos`        | Arc cosine of angle in radians                                |
