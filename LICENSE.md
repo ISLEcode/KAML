@@ -1,6 +1,8 @@
 ---
-revision    : Wed Feb 07, 2018 08:01:50
-subject     : KAML licensing
+revision    : Wed Feb 07, 2018 08:08:30
+title       : KAML ain't markup language
+subtitle    : Licensing
+author      : Jean-Michel Marcastel
 ---
 
 # KAML License
@@ -141,7 +143,7 @@ available under these terms and conditions.
 
 3.  Term. The term of this Public License is specified in [Section 6(1)](#6-1).
 
-<a name="2-a-4"></a>
+    <a name="2-a-4"></a>
 
 4.  Media and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all
     media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The
