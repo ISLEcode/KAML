@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 14:43:23
+revision    : Wed Feb 07, 2018 16:28:42
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -415,55 +415,36 @@ values, when these are to be used in arithmetic expressions, is how to you want 
     ```
 
 <!-- @} -->
-#### [Epoch time](#numbers) <!-- @{ -->
+#### [Date and time](#numbers) <!-- @{ -->
 
-<span style="color:red">
+[KAML] does not provide a built-in data type for date and time values. These can be represented as scalars in a human readable
+format. Or as a numerical value with reference to a point in time -- such as the UNIX epoch, and on which arithmetic expressions
+can be performed. Providing a means of switching from one representation to another doesn't appear to be within the scope of
+[KAML].
 
-**This section is work-in-progress. It was ripped from [TOML] with the intent to adapt it for [KAML] using the UNIX _Epoch_
-reference point in time.**
+Nonetheless manipulation of times and dates is a necessity. [KAML] addresses this with:
 
-</span>
+1.  The smallest unit of time is the second.
 
-To unambiguously represent a specific instant in time, you may use an [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time with offset.
+1.  A point in time reference for arithmetic calculations: the UNIX [Epoch] \(1970-01-01T00:00:00).
 
-```{.sh}
-odt1=1979-05-27T07:32:00Z
-odt2=1979-05-27T00:32:00-07:00
-odt3=1979-05-27T00:32:00.999999-07:00
-```
+    ```
+    1518013975
+    ```
 
-The precision of fractional seconds is implementation specific, but at least millisecond precision is expected. If the value
-contains greater precision than the implementation can support, the additional precision must be truncated, not rounded.
+1.  A standard for the string representation of dates and times: [RFC 3339] (which is a profile of [ISO 8601]).
 
-If you omit the offset from an [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time, it will represent the given
-date-time without any relation to an offset or timezone. It cannot be converted to an instant in time without additional
-information. Conversion to an instant, if required, is implementation specific.
+    ```
+    2018-02-07T15:32:55
+    ```
 
-```{.sh}
-ldt1=1979-05-27T07:32:00
-ldt2=1979-05-27T00:32:00.999999
-```
+1.  A means of converting scalar representations to numeric values, and vis-versa.
 
-The precision of fractional seconds is implementation specific, but at least millisecond precision is expected. If the value
-contains greater precision than the implementation can support, the additional precision must be truncated, not rounded.
-
-If you include only the date portion of an [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time, it will represent
-that entire day without any relation to an offset or timezone.
-
-```{.sh}
-ld1=1979-05-27
-```
-
-If you include only the time portion of an [RFC 3339](http://tools.ietf.org/html/rfc3339) formatted date-time, it will represent
-that time of day without any relation to a specific day or any offset or timezone.
-
-```{.sh}
-lt1=07:32:00
-lt2=00:32:00.999999
-```
-
-The precision of fractional seconds is implementation specific, but at least millisecond precision is expected. If the value
-contains greater precision than the implementation can support, the additional precision must be truncated, not rounded.
+    ```
+    integer number=1518013975
+    scalar=$(date -j -r ${this.number} +%Y-%m-%dT%H:%M:%S)
+    integer number_again=$(date -j -f %Y-%m-%dT%H:%M:%S ${this.scalar} +%s)
+    ```
 
 <!-- @} -->
 #### [Arithmetic expressions](#numbers) <!-- @{ -->
@@ -925,16 +906,19 @@ Documentation, bug reports, pull requests, and all other contributions are welco
 <!-- @{ bookmarks -->
 
 [ASN-1]:        https://en.wikipedia.org/wiki/Abstract_Syntax_Notation_One
+[ISO 8601]:     https://en.wikipedia.org/wiki/ISO_8601
+[CommonMark]:   https://en.wikipedia.org/wiki/Markdown#CommonMark
 [Doxygen]:      https://en.wikipedia.org/wiki/Doxygen
 [EBNF]:         https://en.wikipedia.org/wiki/Extended_Backus–Naur_form
+[Epoch]:        https://en.wikipedia.org/wiki/Unix_time
 [INI]:          https://en.wikipedia.org/wiki/INI_file
 [JSON]:         https://en.wikipedia.org/wiki/JSON
 [KAML]:         https://github.com/ISLEcode/KAML
 [Markdown]:     https://en.wikipedia.org/wiki/Markdown
-[CommonMark]:   https://en.wikipedia.org/wiki/Markdown#CommonMark
 [Open Group]:   http://www.opengroup.org
 [POSIX]:        https://en.wikipedia.org/wiki/POSIX
 [Pandoc]:       https://en.wikipedia.org/wiki/Pandoc
+[RFC 3339]:     http://tools.ietf.org/html/rfc3339
 [SGML]:         https://en.wikipedia.org/wiki/Standard_Generalized_Markup_Language
 [SheBang]:      https://en.wikipedia.org/wiki/Shebang_(Unix)
 [TOML]:         https://en.wikipedia.org/wiki/TOML
