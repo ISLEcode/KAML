@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 08:08:33
+revision    : Wed Feb 07, 2018 08:29:18
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -297,6 +297,14 @@ backslash character (`\`) which _escapes_ their default meaning. You can quote a
     (`\`) and the backtick (````). If the dollar sign (`$`) is not escaped, then property substitution is done inside the double
     quotes.
 
+-   message grouping (double) quotes ('$"..."), the same as grouping quotes except that the string will be looked up in
+    a locale-specific message dictionary and replaced if found. The dollar sign (`$`) is always deleted.
+
+    ```{.sh}
+    LANG=fr-FR
+    greeting=$"Welcome"         # := Bienvenu
+    ```
+
 -   ANSI C strings (`$'...'`) to remove the special meaning of all characters except the ANSI C escape sequences:
 
     | Escape sequence   | Character                                                                     |
@@ -311,135 +319,6 @@ backslash character (`\`) which _escapes_ their default meaning. You can quote a
     | `\\`              | Backslash                                                                     |
     | `\E`              | Escape character                                                              |
     | `\0x`             | The 8-bit character whose ASCI code is the 1-, 2-, or 3-digit octal number `x`|
-
--   message grouping (double) quotes ('$"..."), the same as grouping quotes except that the string will be looked up in
-    a locale-specific message dictionary and replaced if found. The dollar sign (`$`) is always deleted.
-
-    ```{.sh}
-    LANG=fr-FR
-    greeting=$"Welcome"         # := Bienvenu
-    ```
-
-There are four ways to express strings: basic, multi-line basic, literal, and
-multi-line literal. All strings must contain only valid UTF-8 characters.
-
-**Basic strings** are surrounded by quotation marks. Any Unicode character may
-be used except those that must be escaped: quotation mark, backslash, and the
-control characters (U+0000 to U+001F, U+007F).
-
-```{.sh}
-str="I'm a string. \"You can quote me\". Name\tJos\u00E9\nLocation\tSF."
-```
-
-For convenience, some popular characters have a compact escape sequence.
-
-```
-\b         - backspace       (U+0008)
-\t         - tab             (U+0009)
-\n         - linefeed        (U+000A)
-\f         - form feed       (U+000C)
-\r         - carriage return (U+000D)
-\"         - quote           (U+0022)
-\\         - backslash       (U+005C)
-\uXXXX     - unicode         (U+XXXX)
-\UXXXXXXXX - unicode         (U+XXXXXXXX)
-```
-
-Any Unicode character may be escaped with the `\uXXXX` or `\UXXXXXXXX` forms.
-The escape codes must be valid Unicode [scalar values](http://unicode.org/glossary/#unicode_scalar_value).
-
-All other escape sequences not listed above are reserved and, if used, [KAML]
-should produce an error.
-
-Sometimes you need to express passages of text (e.g. translation files) or would
-like to break up a very long string into multiple lines. [KAML] makes this easy.
-
-**Multi-line basic strings** are surrounded by three quotation marks on each
-side and allow newlines. A newline immediately following the opening delimiter
-will be trimmed. All other whitespace and newline characters remain intact.
-
-```{.sh}
-str1="""
-Roses are red
-Violets are blue"""
-```
-
-[KAML] parsers should feel free to normalize newline to whatever makes sense for
-their platform.
-
-```{.sh}
-# On a Unix system, the above multi-line string will most likely be the same as:
-str2="Roses are red\nViolets are blue"
-
-# On a Windows system, it will most likely be equivalent to:
-str3="Roses are red\r\nViolets are blue"
-```
-
-For writing long strings without introducing extraneous whitespace, use a "line
-ending backslash". When the last non-whitespace character on a line is a `\`, it
-will be trimmed along with all whitespace (including newlines) up to the next
-non-whitespace character or closing delimiter. All of the escape sequences that
-are valid for basic strings are also valid for multi-line basic strings.
-
-```{.sh}
-# The following strings are byte-for-byte equivalent:
-str1="The quick brown fox jumps over the lazy dog."
-
-str2="""
-The quick brown \
-
-
-  fox jumps over \
-    the lazy dog."""
-
-str3="""\
-       The quick brown \
-       fox jumps over \
-       the lazy dog.\
-       """
-```
-
-Any Unicode character may be used except those that must be escaped: backslash
-and the control characters (U+0000 to U+001F). Quotation marks need not be
-escaped unless their presence would create a premature closing delimiter.
-
-If you're a frequent specifier of Windows paths or regular expressions, then
-having to escape backslashes quickly becomes tedious and error prone. To help,
-[KAML] supports literal strings which do not allow escaping at all.
-
-**Literal strings** are surrounded by single quotes. Like basic strings, they
-must appear on a single line:
-
-```{.sh}
-# What you see is what you get.
-winpath='C:\Users\nodejs\templates'
-winpath2='\\ServerX\admin$\system32\'
-quoted='Tom "Dubs" Preston-Werner'
-regex='<\i\c*\s*>'
-```
-
-Since there is no escaping, there is no way to write a single quote inside a
-literal string enclosed by single quotes. Luckily, [KAML] supports a multi-line
-version of literal strings that solves this problem.
-
-**Multi-line literal strings** are surrounded by three single quotes on each
-side and allow newlines. Like literal strings, there is no escaping whatsoever.
-A newline immediately following the opening delimiter will be trimmed. All
-other content between the delimiters is interpreted as-is without modification.
-
-```{.sh}
-regex2='''I [dw]on't need \d{2} apples'''
-lines='''
-The first newline is
-trimmed in raw strings.
-   All other whitespace
-   is preserved.
-'''
-```
-
-Control characters other than tab are not permitted in a literal string. Thus,
-for binary data it is recommended that you use Base64 or another suitable ASCII
-or UTF-8 encoding. The handling of that encoding will be application specific.
 
 <!-- @} -->
 <!-- @{ h3: arrays --->
