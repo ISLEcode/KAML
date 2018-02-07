@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 07:43:01
+revision    : Wed Feb 07, 2018 07:45:35
 subject     : KAML licensing
 ---
 
@@ -180,47 +180,47 @@ m.  You means the individual or entity exercising the Licensed Rights under this
 
 Your exercise of the Licensed Rights is expressly made subject to the following conditions.
 
-a.  Attribution.
+##### A. Attribution.
 
-    1.  If You Share the Licensed Material (including in modified form), You must:
+1.  If You Share the Licensed Material (including in modified form), You must:
 
-        a.  retain the following if it is supplied by the Licensor with the Licensed Material:
+    a.  retain the following if it is supplied by the Licensor with the Licensed Material:
 
-            i.  identification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any
-                reasonable manner requested by the Licensor (including by pseudonym if designated);
+        i.  identification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any
+            reasonable manner requested by the Licensor (including by pseudonym if designated);
 
-            i.  a copyright notice;
+        i.  a copyright notice;
 
-            i.  a notice that refers to this Public License;
+        i.  a notice that refers to this Public License;
 
-            i.  a notice that refers to the disclaimer of warranties;
+        i.  a notice that refers to the disclaimer of warranties;
 
-            i.  a URI or hyperlink to the Licensed Material to the extent reasonably practicable;
+        i.  a URI or hyperlink to the Licensed Material to the extent reasonably practicable;
 
-        b.  indicate if You modified the Licensed Material and retain an indication of any previous modifications; and
+    b.  indicate if You modified the Licensed Material and retain an indication of any previous modifications; and
 
-        c.  indicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink
-            to, this Public License.
+    c.  indicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink
+        to, this Public License.
 
-    2.  You may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in
-        which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or
-        hyperlink to a resource that includes the required information.
+2.  You may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in
+    which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or
+    hyperlink to a resource that includes the required information.
 
-    3.  If requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent
-        reasonably practicable.
+3.  If requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent
+    reasonably practicable.
 
-b.  ShareAlike.
+##### B. ShareAlike.
 
-    In addition to the conditions in Section 3(a), if You Share Adapted Material You produce, the following conditions also apply.
+In addition to the conditions in Section 3(a), if You Share Adapted Material You produce, the following conditions also apply.
 
-    1.  The Adapter's License You apply must be a Creative Commons license with the same License Elements, this version or later,
-        or a BY-SA Compatible License.
+1.  The Adapter's License You apply must be a Creative Commons license with the same License Elements, this version or later,
+    or a BY-SA Compatible License.
 
-    2.  You must include the text of, or the URI or hyperlink to, the Adapter's License You apply. You may satisfy this condition
-        in any reasonable manner based on the medium, means, and context in which You Share Adapted Material.
+2.  You must include the text of, or the URI or hyperlink to, the Adapter's License You apply. You may satisfy this condition
+    in any reasonable manner based on the medium, means, and context in which You Share Adapted Material.
 
-    3.  You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological
-        Measures to, Adapted Material that restrict exercise of the rights granted under the Adapter's License You apply.
+3.  You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological
+    Measures to, Adapted Material that restrict exercise of the rights granted under the Adapter's License You apply.
 
 #### Section 4 -- Sui Generis Database Rights.
 
@@ -297,7 +297,7 @@ b.  To the extent possible, if any provision of this Public License is deemed un
     License without affecting the enforceability of the remaining terms and conditions.
 
 c.  No term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by
-the Licensor.
+    the Licensor.
 
 d.  Nothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and
     immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.
