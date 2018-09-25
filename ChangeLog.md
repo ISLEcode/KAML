@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 17:28:45
+revision    : Wed Feb 07, 2018 21:11:32
 title       : KAML ain't markup language
 subtitle    : Change log and next round task list
 author      : Jean-Michel Marcastel
@@ -10,6 +10,13 @@ author      : Jean-Michel Marcastel
 -   Rework the examples to be more consistent with specifications
 -   Create real `README.md` and move current `README.md` to `SPEC.md`
 -   Add shebang examples to illustrate the principle
+
+<!-- Latest -->
+
+#### 2018-02-07 (Wed) 21:11
+
+Changed
+:   -   Typos and minor editing of text
 
 #### 2018-02-07 (Wed) 17:21
 
