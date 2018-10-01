@@ -1,10 +1,3 @@
----
-revision    : Mon Oct 01, 2018 19:47:17
-title       : KAML ain't markup language
-subtitle    : The specifications
-author      : Jean-Michel Marcastel
----
-
 KAML ain't markup language
 --------------------------
 
