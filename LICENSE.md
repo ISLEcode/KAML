@@ -1,5 +1,5 @@
 ---
-revision    : Wed Feb 07, 2018 17:29:50
+revision    : Mon Oct 01, 2018 19:59:42
 title       : KAML ain't markup language
 subtitle    : Licensing
 author      : Jean-Michel Marcastel
@@ -341,4 +341,3 @@ licenses.
 Creative Commons may be contacted at creativecommons.org.
 
 <!-- vim: set nu et tw=130 ts=8 sts=4 sw=4 ff=unix fo-=l fo+=tcroq2 fdm=marker fmr=@{,@} spell spelllang=en_gb syn=markdown :-->
-
