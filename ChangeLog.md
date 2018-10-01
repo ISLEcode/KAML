@@ -1,5 +1,5 @@
 ---
-revision    : Mon Oct 01, 2018 20:07:27
+revision    : Mon Oct 01, 2018 20:08:41
 title       : KAML ain't markup language
 subtitle    : Change log and next round task list
 author      : Jean-Michel Marcastel
@@ -11,13 +11,12 @@ author      : Jean-Michel Marcastel
 -   Add shebang examples to illustrate the principle
 -   Create HTML and PDF versions
 
-#### 2018-10-01 (Mon) 20:07 {#wip}
+#### 2018-10-01 (Mon) 20:08 {#wip}
 
-Changed
-:   -   Typos and minor editing of text
-    -   Moved specifications to file `kaml-specifications.md`
-    -   Rewrote `README.md` in GitHub-flavoured Markdown
-    -   Assigned tag `release-0.1.0`
+-   Corrected typos and minor editing of text
+-   Moved specifications to file `kaml-specifications.md`
+-   Rewrote `README.md` in GitHub-flavoured Markdown
+-   Assigned tag `release-0.1.0`
 
 #### 2018-02-07 (Wed) 17:21
 
