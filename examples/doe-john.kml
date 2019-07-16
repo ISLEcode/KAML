@@ -1,0 +1,45 @@
+#! ksh
+#! @brief    User specification for doe-john (Doe, John)
+#! @warning  This is an auto-generated file; you SHOULD NOT edit it directly.
+#! @revision 2019-07-16 (Tue) 14:10:52
+
+fullname='Doe, John'
+gid=100
+homedir=doe-john
+kind=staff
+name=doe-john
+policy=ait-guest
+shell=ksh
+sshkeycount=1
+sshkeydb=(
+    [unix-login]=(
+        asciiart='...'
+        bbdigest='...'
+        created='...'
+        fingerprint='...'
+        privatekey=$'...'
+        publickey='...'
+        timestamp='...'
+    )
+)
+uid=20006
+accountcount=1
+accountdb=(
+    [example.com]=(
+        created=1554597021.8116341
+        failedlogins=0
+        fullname='DOE, John'
+        gid=20
+        homedir=/Users/doe-john
+        lastfailedlogin=0
+        lastpasswordupdate=1554597023.4859071
+        metadir=/Local/Default
+        name=doe-john
+        osname=macos
+        shell=/bin/ksh
+        uid=20006
+        uuid=584787D4-54F6-4AA2-AA73-A1A59FB976ED
+    )
+)
+
+# vim: nospell
