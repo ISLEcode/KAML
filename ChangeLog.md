@@ -1,5 +1,5 @@
 ---
-revision    : Mon Oct 01, 2018 20:08:41
+revision    : 2019-07-16 (Tue) 14:21:53
 title       : KAML ain't markup language
 subtitle    : Change log and next round task list
 author      : Jean-Michel Marcastel
@@ -11,7 +11,12 @@ author      : Jean-Michel Marcastel
 -   Add shebang examples to illustrate the principle
 -   Create HTML and PDF versions
 
-#### 2018-10-01 (Mon) 20:08 {#wip}
+#### 2019-07-16 (Tue) 14:21:53 {#wip}
+
+-   Changed KAML URLs to point to KAML specification and not to the Github repository
+-   Added a sample KAML file
+
+#### 2018-10-01 (Mon) 20:08
 
 -   Corrected typos and minor editing of text
 -   Moved specifications to file `kaml-specifications.md`
@@ -22,4 +27,4 @@ author      : Jean-Michel Marcastel
 
 First draft ready for community review.
 
-<!-- vim: set nu et tw=130 ts=8 sts=4 sw=4 ff=unix fo-=l fo+=tcroq2 fdm=marker fmr=@{,@} spell spelllang=en_gb :-->
+<!-- vim: set nospell :-->
