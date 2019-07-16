@@ -1,5 +1,5 @@
 ---
-revision    : Mon Oct 01, 2018 19:50:12
+revision    : 2019-07-16 (Tue) 14:21:06
 title       : KAML ain't markup language
 subtitle    : The specifications
 author      : Jean-Michel Marcastel
@@ -853,25 +853,25 @@ concept and getting started examples.
 
 Documentation, bug reports, pull requests, and all other contributions are welcome!
 
-[ASN-1]:        https://en.wikipedia.org/wiki/Abstract_Syntax_Notation_One
-[ISO 8601]:     https://en.wikipedia.org/wiki/ISO_8601
-[CommonMark]:   https://en.wikipedia.org/wiki/Markdown#CommonMark
-[Doxygen]:      https://en.wikipedia.org/wiki/Doxygen
-[EBNF]:         https://en.wikipedia.org/wiki/Extended_Backus–Naur_form
-[Epoch]:        https://en.wikipedia.org/wiki/Unix_time
-[INI]:          https://en.wikipedia.org/wiki/INI_file
-[JSON]:         https://en.wikipedia.org/wiki/JSON
-[KAML]:         https://github.com/ISLEcode/KAML
-[Markdown]:     https://en.wikipedia.org/wiki/Markdown
-[Open Group]:   http://www.opengroup.org
-[POSIX]:        https://en.wikipedia.org/wiki/POSIX
-[Pandoc]:       https://en.wikipedia.org/wiki/Pandoc
-[RFC 3339]:     http://tools.ietf.org/html/rfc3339
-[SGML]:         https://en.wikipedia.org/wiki/Standard_Generalized_Markup_Language
-[SheBang]:      https://en.wikipedia.org/wiki/Shebang_(Unix)
-[TOML]:         https://en.wikipedia.org/wiki/TOML
-[XML]:          https://en.wikipedia.org/wiki/XML
-[XSLT]:         https://en.wikipedia.org/wiki/XSLT
-[YAML]:         https://en.wikipedia.org/wiki/YAML
+  [ASN-1]:        https://en.wikipedia.org/wiki/Abstract_Syntax_Notation_One
+  [ISO 8601]:     https://en.wikipedia.org/wiki/ISO_8601
+  [CommonMark]:   https://en.wikipedia.org/wiki/Markdown#CommonMark
+  [Doxygen]:      https://en.wikipedia.org/wiki/Doxygen
+  [EBNF]:         https://en.wikipedia.org/wiki/Extended_Backus–Naur_form
+  [Epoch]:        https://en.wikipedia.org/wiki/Unix_time
+  [INI]:          https://en.wikipedia.org/wiki/INI_file
+  [JSON]:         https://en.wikipedia.org/wiki/JSON
+  [KAML]:         https://github.com/ISLEcode/KAML/blob/master/kaml-specifications.md
+  [Markdown]:     https://en.wikipedia.org/wiki/Markdown
+  [Open Group]:   http://www.opengroup.org
+  [POSIX]:        https://en.wikipedia.org/wiki/POSIX
+  [Pandoc]:       https://en.wikipedia.org/wiki/Pandoc
+  [RFC 3339]:     http://tools.ietf.org/html/rfc3339
+  [SGML]:         https://en.wikipedia.org/wiki/Standard_Generalized_Markup_Language
+  [SheBang]:      https://en.wikipedia.org/wiki/Shebang_(Unix)
+  [TOML]:         https://en.wikipedia.org/wiki/TOML
+  [XML]:          https://en.wikipedia.org/wiki/XML
+  [XSLT]:         https://en.wikipedia.org/wiki/XSLT
+  [YAML]:         https://en.wikipedia.org/wiki/YAML
 
-<!-- vim: set nu et tw=130 ts=8 sts=4 sw=4 ff=unix fo-=l fo+=tcroq2 fdm=marker fmr=@{,@} spell spelllang=en_gb :-->
+<!-- vim: set nospell :-->
